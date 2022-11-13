@@ -1,0 +1,3 @@
+{
+  "extends": ["kaho/ts", "kaho/react"]
+}
