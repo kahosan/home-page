@@ -27,7 +27,7 @@
     "name": "bgmi",
     "description": "动画片自动下载机 功能强大",
     "icon": "data-player",
-    "path": "/code"
+    "path": "/bgmi"
   },
   {
     "name": "qbittorrent",
