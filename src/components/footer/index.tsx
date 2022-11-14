@@ -5,8 +5,8 @@ export default function Footer() {
     <footer className=" max-w-5xl mx-auto p-3 op-60">
       <div className="font-300 text-13px flex justify-between items-end w-full">
         <p>
-          <Link href="https://blog.kahosan.top">Blog</Link>
-          <Link href="https://twitter.com/kaho_suyf">Twitter</Link>
+          <Link href={import.meta.env.HOME_BLOG || ''}>Blog</Link>
+          <Link href={import.meta.env.HOME_TWITTER || ''}>Twitter</Link>
         </p>
         <div className="text-right">
           <p className="mr-4px mb-1">由<Link href="https://github.com/kahosan/home-page">Home-Page</Link>强力驱动</p>
