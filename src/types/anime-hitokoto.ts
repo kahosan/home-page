@@ -13,6 +13,6 @@ export interface Hitokoto {
   length: number
 }
 
-export interface requestError {
+export interface RequestError {
   message: string
 }

@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 
-import type { Hitokoto, requestError } from '@/types/anime-hitokoto';
+import type { Hitokoto, RequestError } from '@/types/anime-hitokoto';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -9,7 +9,7 @@ const fetcher = (url: string) => fetch(url).then(res => res.json());
 * {@link https://hitokoto.cn/}
 */
 
-export const useAnimeHitokoto = () => useSWR<Hitokoto, requestError>(
+export const useAnimeHitokoto = () => useSWR<Hitokoto, RequestError>(
   'https://v1.hitokoto.cn/?c=a',
   fetcher,
   {
