@@ -15,7 +15,8 @@ export default defineConfig({
       transition: 'all .3s ease',
       'box-shadow': '0 -2px #ff4b4498 inset'
     }],
-    ['ilinkhover', { 'box-shadow': '0 -8.8px #ff4b4498 inset' }]
+    ['ilinkhover', { 'box-shadow': '0 -8.8px #ff4b4498 inset' }],
+    ['icon-tap-color', { '-webkit-tap-highlight-color': 'transparent' }]
   ],
   shortcuts: [
     ['link', 'ilink hover:ilinkhover'],
