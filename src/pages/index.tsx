@@ -20,7 +20,7 @@ function DateTag() {
   const text = `${date.getFullYear()} 年 ${date.getMonth() + 1} 月 ${date.getDate()} 日 ${day[date.getDay() as keyof typeof day]}`;
 
   return (
-    <p className="op-60 mt-2 text-3">{text}</p>
+    <p className="op-60 my-1 text-3">{text}</p>
   );
 }
 
@@ -31,10 +31,10 @@ export default function DataCenterPage() {
     <div className="h-[calc(100vh-400px)] py-18 p-4 max-w-5xl mx-auto">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="">NAS 数据中心</h2>
+          <h2>NAS 数据中心</h2>
           <DateTag />
         </div>
-        <p className="w-40% text-right text-0.9rem">
+        <p className="text-right text-0.9rem lt-md:w-50%">
           <Hitokoto />
         </p>
       </div>
@@ -50,7 +50,6 @@ export default function DataCenterPage() {
           <Services />
         </div>
       </div>
-      <p className="op-60 mt-5">// TODO</p>
     </div>
   );
 }
