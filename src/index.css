@@ -16,6 +16,7 @@ html {
 html.dark {
   background-color: #0c0c0c;
   color: #e2e2e2;
+  color-scheme: dark;
 }
 
 html.light {
