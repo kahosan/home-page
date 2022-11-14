@@ -3,10 +3,6 @@ import { useAnimeHitokoto } from '@/hooks/use-anime-hitokoto';
 export default function Hitokoto() {
   const { data, error } = useAnimeHitokoto();
 
-  if (error) {
-    console.error(error);
-  }
-
   return (
     error
       ? <p>一言加载失败</p>

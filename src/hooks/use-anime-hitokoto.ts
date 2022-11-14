@@ -13,6 +13,9 @@ export const useAnimeHitokoto = () => useSWR<Hitokoto, RequestError>(
   'https://v1.hitokoto.cn/?c=a',
   fetcher,
   {
-    revalidateOnFocus: false
+    revalidateOnFocus: false,
+    onError: (e) => {
+      console.error(e.message);
+    }
   }
 );
