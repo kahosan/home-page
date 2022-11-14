@@ -3,7 +3,7 @@ import Divider from '@/components/divider';
 
 export default function Header() {
   return (
-    <header className="fixed top-0 right-0 left-0 z-999 blurBackground dark:bg-[rgba(12,12,12,0.65)] bg-[rgb(241,241,241,0.65)]">
+    <header className="fixed top-0 right-0 left-0 z-999 blur-bg dark:bg-[rgba(12,12,12,0.65)] bg-[rgb(241,241,241,0.65)]">
       <div className="flex justify-between items-center p-4 max-w-5xl mx-auto h-60px">
         <h3>Data Center</h3>
         <div className="flex flex-row children:mx-2">

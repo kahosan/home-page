@@ -7,19 +7,19 @@ function generatorIconList() {
 
 export default defineConfig({
   rules: [
-    ['blurBackground', { 'backdrop-filter': 'blur(12px)' }],
-    ['ilink', {
+    ['blur-bg', { 'backdrop-filter': 'blur(12px)' }],
+    ['i-link', {
       padding: '2px 0',
       margin: 'auto 4px',
       cursor: 'pointer',
       transition: 'all .3s ease',
       'box-shadow': '0 -2px #ff4b4498 inset'
     }],
-    ['ilinkhover', { 'box-shadow': '0 -8.8px #ff4b4498 inset' }],
+    ['i-link-hover', { 'box-shadow': '0 -8.8px #ff4b4498 inset' }],
     ['icon-tap-color', { '-webkit-tap-highlight-color': 'transparent' }]
   ],
   shortcuts: [
-    ['link', 'ilink hover:ilinkhover'],
+    ['link', 'i-link hover:i-link-hover'],
     [/^opacity-animation-(\d+)$/, ([, d]) => `transition-opacity-${Number(d) * 100} hover:opacity-50 hover:transition-opacity-${Number(d) * 100}`]
   ],
   theme: {
