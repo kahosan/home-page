@@ -46,7 +46,7 @@ export default function DataCenterPage() {
             <Button onClick={() => setEdit(!edit)}>删除</Button>
           </div>
         </div>
-        <div className="mt-5 flex flex-wrap justify-evenly">
+        <div className="mt-5 grid grid-cols-4 lt-md:grid-cols-2 ">
           <Services />
         </div>
       </div>
