@@ -7,9 +7,18 @@ function generatorIconList() {
 
 export default defineConfig({
   rules: [
-    ['blurBackground', { 'backdrop-filter': 'blur(10px)' }]
+    ['blurBackground', { 'backdrop-filter': 'blur(10px)' }],
+    ['ilink', {
+      padding: '2px 0',
+      margin: 'auto 4px',
+      cursor: 'pointer',
+      transition: 'all .3s ease',
+      'box-shadow': '0 -2px #ff4b4498 inset'
+    }],
+    ['ilinkhover', { 'box-shadow': '0 -8.8px #ff4b4498 inset' }]
   ],
   shortcuts: [
+    ['link', 'ilink hover:ilinkhover'],
     [/^opacity-animation-(\d+)$/, ([, d]) => `transition-opacity-${Number(d) * 100} hover:opacity-50 hover:transition-opacity-${Number(d) * 100}`]
   ],
   theme: {

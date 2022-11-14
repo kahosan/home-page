@@ -28,7 +28,7 @@ export default function DataCenterPage() {
   const { edit, setEdit, handleAddService } = useEditServices();
 
   return (
-    <div className="h-[calc(100vh-400px)] py-18 p-4 max-w-5xl mx-auto">
+    <div className="h-[calc(100vh-70px)] pt-70px px-4 max-w-5xl mx-auto">
       <div className="flex justify-between items-center">
         <div>
           <h2>NAS 数据中心</h2>
