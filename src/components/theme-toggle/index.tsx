@@ -9,6 +9,6 @@ export function ThemeToggle() {
   }, [currentTheme, setTheme]);
 
   return (
-    <div onClick={toggle} className={`${currentTheme === 'dark' ? 'i-carbon-sun' : 'i-carbon-moon'} text-5 cursor-pointer icon`} />
+    <div onClick={toggle} className={`${currentTheme === 'dark' ? 'i-carbon-sun' : 'i-carbon-moon'} text-5 cursor-pointer opacity-animation`} />
   );
 }

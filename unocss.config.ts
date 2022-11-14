@@ -9,6 +9,9 @@ export default defineConfig({
   rules: [
     ['blurBackground', { 'backdrop-filter': 'blur(10px)' }]
   ],
+  shortcuts: [
+    [/^opacity-animation-(\d+)$/, ([, d]) => `transition-opacity-${Number(d) * 100} hover:opacity-50 hover:transition-opacity-${Number(d) * 100}`]
+  ],
   theme: {
     colors: {
       boxBackground: '#E9EAE9',

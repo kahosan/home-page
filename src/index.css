@@ -32,19 +32,6 @@ a {
   text-decoration: none;
 }
 
-a.icon::selection {
-  background: unset;
-}
-
-.icon {
-  transition: opacity 0.3s ease;
-}
-
-.icon:hover {
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-}
-
 .btn {
   background-color: #f1f1f1;
   border: 1px solid #0c0c0c42;
