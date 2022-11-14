@@ -21,7 +21,7 @@ export default function ServiceCard(props: ServiceCardProps) {
           <div className={`i-carbon-${props.icon} text-2xl mr-2`} />
           <p className="text-0.9rem">{props.name.toUpperCase()}</p>
         </div>
-        <small className="my-2 text-px op-70 block">{props.description}</small>
+        <small className="my-2 text-12px op-70 block">{props.description}</small>
         <a href={props.path}><Button className="px-6 py-2.5 ">点击跳转</Button></a>
       </div>
     </div>
