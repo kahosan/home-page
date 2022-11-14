@@ -7,7 +7,7 @@ function generatorIconList() {
 
 export default defineConfig({
   rules: [
-    ['blurBackground', { 'backdrop-filter': 'blur(10px)' }],
+    ['blurBackground', { 'backdrop-filter': 'blur(12px)' }],
     ['ilink', {
       padding: '2px 0',
       margin: 'auto 4px',
