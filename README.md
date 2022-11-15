@@ -33,6 +33,14 @@ cd home-page && pnpm i # npm i
 
 其中，`icon`，需要在 [这里](https://icones.js.org/collection/carbon) 找到你喜欢的图标，点击它会有一个类似 carbon:xxx 的字符串，将 xxx 这行字符串填入 `icon` 字段即可。目前只支持 `carbon`。
 
+然后 build 项目并部署
+
+```bash
+pnpm run build # npm run build
+```
+
+可以把 build 出来的 dist 文件夹丢到 nginx 或者其他静态服务器上，或者直接用 `pnpm run serve` 来启动一个本地服务器。
+
 > 每次修改完 `services.json` 需要重新运行 build 命令。在线编辑功能还在开发中。
 
 ### 使用 Github Pages
