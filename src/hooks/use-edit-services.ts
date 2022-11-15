@@ -9,9 +9,14 @@ export function useEditServices() {
     // TODO
   };
 
+  const handleDeleteService = () => {
+    // TODO
+  };
+
   return {
     edit,
     setEdit,
-    handleAddService
+    handleAddService,
+    handleDeleteService
   };
 }
