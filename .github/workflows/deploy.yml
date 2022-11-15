@@ -14,6 +14,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
+        pnpm-version: [7.16.0]
 
     steps:
       - name: checkout
@@ -23,11 +24,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+
+      - name: use pnpm ${{ matrix.pnpm-version }}
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ matrix.pnpm-version }}
 
       - name: build
         run: |
-          npm ci && npm run build --if-present
+          pnpm i && pnpm run build
       
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@v4
