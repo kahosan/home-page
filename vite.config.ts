@@ -5,6 +5,7 @@ import unocss from 'unocss/vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [preact(), unocss()],
+  publicDir: './',
   envPrefix: 'HOME_',
   resolve: {
     alias: {
