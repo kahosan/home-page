@@ -43,13 +43,13 @@ cd home-page && pnpm i # npm i
 pnpm run build # npm run build
 ```
 
-可以把 build 出来的 dist 文件夹丢到 nginx 或者其他静态服务器上，或者直接用 `pnpm run serve` 来启动一个本地服务器。后面加上 `--port 端口` 来指定端口。
+可以把 build 出来的 dist 文件夹丢到 nginx 的部署目录，或者直接用 `pnpm run serve` 来启动一个本地服务器。后面加上 `--port 端口` 来指定端口。
 
 > 每次修改完 `services.json` 需要重新运行 build 命令。在线编辑功能还在开发中。
 
 ### 使用 Github Pages
 
-fork 本项目，然后会自动运行构建，然后在仓库的 settings 中将 pages 设置为 `gh-pages` 分支即可。
+fork 本项目，然后会自动运行构建，在仓库的 settings 中将 pages 设置为 `gh-pages` 分支即可。
 
 域名为 `https://<你的用户名>.github.io/home-page`，想用 vercel、netlify 之类的服务也都是随你喜欢啦
 
