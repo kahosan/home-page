@@ -32,7 +32,7 @@ jobs:
         
       - name: set HOME_IS_GITHUB_PAGES field
         run: |
-          echo '\n'HOME_IS_GITHUB_PAGES=true >> .env
+          echo "\nHOME_IS_GITHUB_PAGES=true" >> .env
 
       - name: build
         run: |
