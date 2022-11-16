@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  HOME_IS_GITHUB_PAGES: true
+
 jobs:
   build:
 
@@ -30,13 +33,9 @@ jobs:
         with:
           version: ${{ matrix.pnpm-version }}
         
-      - name: set HOME_IS_GITHUB_PAGES field
-        run: |
-          echo "\nHOME_IS_GITHUB_PAGES=true" >> .env
-
       - name: build
         run: |
-          echo .env && pnpm i && pnpm run build
+          pnpm i && pnpm run build
       
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@v4
