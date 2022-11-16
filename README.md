@@ -63,6 +63,10 @@ fork 本项目，然后会自动运行构建，在仓库的 settings 中将 page
 
 把你想自定义的背景图放到 `public` 目录，然后修改 `src/index.css` 中最下面的 `.custom-bg` 的配置。需要会一点点的 css 知识
 
+### 自定义 Title
+
+修改 .env 文件中的 `HOME_HEADER_TITLE` 和 `HOME_TITLE` 两个字段
+
 ## 如果你想为本项目做贡献
 
 欢迎 PR

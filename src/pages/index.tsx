@@ -27,7 +27,7 @@ export default function DataCenterPage() {
     <div className="min-h-100vh pt-70px px-4 max-w-5xl mx-auto relative">
       <div className="flex justify-between items-center">
         <div>
-          <h2>NAS 数据中心</h2>
+          <h2>{import.meta.env.HOME_TITLE || 'NAS 数据中心'}</h2>
           <DateTag />
         </div>
         <p className="text-right text-0.9rem lt-md:w-50%">
