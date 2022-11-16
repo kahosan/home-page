@@ -1,7 +1,7 @@
 import { useCallback } from 'preact/hooks';
 import { useDark } from '../../hooks/use-dark';
 
-export function ThemeToggle() {
+export default function ThemeToggle() {
   const { currentTheme, setTheme } = useDark();
 
   const toggle = useCallback(() => {

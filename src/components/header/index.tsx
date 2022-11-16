@@ -1,5 +1,6 @@
-import { ThemeToggle } from '../theme-toggle';
+import ThemeToggle from '@/components/theme-toggle';
 import Divider from '@/components/divider';
+
 import { useEditServices } from '@/hooks/use-edit-services';
 import { useIsGithubPages } from '@/hooks/use-is-github-pages';
 
