@@ -1,4 +1,4 @@
-import { Button } from '@/components/button';
+import Button from '@/components/button';
 import Hitokoto from '@/components/hitokoto';
 import Services from '@/components/services';
 
@@ -25,7 +25,7 @@ function DateTag() {
 }
 
 export default function DataCenterPage() {
-  const { edit, setEdit, handleAddService } = useEditServices();
+  const { edit, setEdit } = useEditServices();
 
   return (
     <div className="h-[calc(100vh-70px)] pt-70px px-4 max-w-5xl mx-auto">
@@ -42,8 +42,7 @@ export default function DataCenterPage() {
         <div className="flex justify-between items-center">
           <h3>在线服务</h3>
           <div className="children:ml-2">
-            <Button onClick={() => handleAddService()}>添加</Button>
-            <Button onClick={() => setEdit(!edit)}>删除</Button>
+            <Button onClick={() => setEdit(!edit)}>编辑</Button>
           </div>
         </div>
         <div className="mt-5 grid grid-cols-4 lt-md:grid-cols-2 ">

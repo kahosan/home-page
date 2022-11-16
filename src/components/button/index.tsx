@@ -7,7 +7,7 @@ interface Props {
   children: preact.ComponentChildren
 }
 
-export function Button(buttonProps: Props & JSX.IntrinsicElements['button']) {
+export default function Button(buttonProps: Props & JSX.IntrinsicElements['button']) {
   const { width, height, children, ...props } = buttonProps;
 
   const { currentTheme } = useDark();
