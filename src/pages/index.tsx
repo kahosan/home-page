@@ -1,8 +1,6 @@
-import Button from '@/components/button';
+import Footer from '@/components/footer';
 import Hitokoto from '@/components/hitokoto';
 import Services from '@/components/services';
-
-import { useEditServices } from '@/hooks/use-edit-services';
 
 function DateTag() {
   const date = new Date();
@@ -25,10 +23,8 @@ function DateTag() {
 }
 
 export default function DataCenterPage() {
-  const { edit, setEdit } = useEditServices();
-
   return (
-    <div className="min-h-[calc(100vh-70px)] pt-70px px-4 max-w-5xl mx-auto">
+    <div className="min-h-100vh pt-70px px-4 max-w-5xl mx-auto relative">
       <div className="flex justify-between items-center">
         <div>
           <h2>NAS 数据中心</h2>
@@ -39,16 +35,11 @@ export default function DataCenterPage() {
         </p>
       </div>
       <div className="mt-5 p-4 w-full rd-2 dark:bg-dark-box-background bg-box-background">
-        <div className="flex justify-between items-center">
-          <h3>在线服务</h3>
-          <div>
-            <Button onClick={() => setEdit(!edit)}>编辑</Button>
-          </div>
-        </div>
-        <div className="mt-5 grid grid-cols-4 lt-md:grid-cols-2 ">
+        <div className="grid grid-cols-4 lt-md:grid-cols-2 ">
           <Services />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
