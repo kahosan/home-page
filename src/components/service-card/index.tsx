@@ -15,9 +15,9 @@ export default function ServiceCard(props: ServiceCardProps) {
         <a href={path} className="text-center opacity-animation-3 relative">
           <div className="flex justify-center items-center">
             <div className={`i-carbon-${icon.trim()} text-2xl mr-2`} />
-            <p className="text-0.9rem">{name.toUpperCase()}</p>
+            <p className="text-3.5">{name.toUpperCase()}</p>
           </div>
-          <small className="mt-2 text-12px op-70 block">{description}</small>
+          <small className="mt-2 text-3 op-70 block">{description}</small>
         </a>
       </div>
     </div>

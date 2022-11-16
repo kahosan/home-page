@@ -41,7 +41,7 @@ export default function DataCenterPage() {
       <div className="mt-5 p-4 w-full rd-2 dark:bg-dark-box-background bg-box-background">
         <div className="flex justify-between items-center">
           <h3>在线服务</h3>
-          <div className="children:ml-2">
+          <div>
             <Button onClick={() => setEdit(!edit)}>编辑</Button>
           </div>
         </div>

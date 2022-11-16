@@ -2,7 +2,7 @@ import { Link } from '../link';
 
 export default function Footer() {
   return (
-    <footer className=" max-w-5xl mx-auto p-3 op-60 mt-10">
+    <footer className=" max-w-5xl mx-auto p-3 op-60 mt-8">
       <div className="font-300 text-13px flex justify-between items-end w-full">
         <p>
           <Link href={import.meta.env.HOME_BLOG || ''}>Blog</Link>
