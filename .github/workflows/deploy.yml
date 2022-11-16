@@ -36,7 +36,7 @@ jobs:
 
       - name: build
         run: |
-          pnpm i && pnpm run build
+          echo .env && pnpm i && pnpm run build
       
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@v4
