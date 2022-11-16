@@ -1,7 +1,10 @@
 <h1 align="center">Home-Page</h1>
 
-![dark](./public/dark.png)
-![white](./public/white.png)
+![dark](.github/image/dark.png)
+
+<p>&nbsp;</p>
+
+![white](.github/image/white.png)
 
 <p align="center">一个简洁的 NAS 主页 & 导航页</p>
 
