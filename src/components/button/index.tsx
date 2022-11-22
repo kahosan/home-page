@@ -19,7 +19,7 @@ export default function Button(buttonProps: Props & JSX.IntrinsicElements['butto
         width: width || 'inherit',
         height: height || 'inherit'
       }}
-      className={(props?.className || '') + (currentTheme === 'dark' ? 'dark btn' : 'btn')}
+      className={`${props?.className || ''} ${currentTheme === 'dark' ? 'dark btn' : 'btn'}`}
     >
       {children}
     </button>
