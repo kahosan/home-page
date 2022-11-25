@@ -1,10 +1,8 @@
 <h1 align="center">Home-Page</h1>
 
-![dark](.github/image/dark.png)
+![normal](.github/image/normal.png)
 
-<p>&nbsp;</p>
-
-![white](.github/image/white.png)
+![edit](.github/image/editmode.png)
 
 <p align="center">一个简洁的 NAS 主页 & 导航页</p>
 
@@ -67,13 +65,20 @@ fork 本项目，然后会自动运行构建，在仓库的 settings 中将 page
 
 修改 .env 文件中的 `HOME_HEADER_TITLE` 和 `HOME_TITLE` 两个字段
 
+### 在线编辑应用列表
+
+目前仅支持 Github Pages，需要先创建一个 Token 并具有读写仓库的权限 [点这里](https://github.com/settings/tokens?type=beta)
+然后打开 home-page 页面，点击右上角的 Github 图标（如果是第一次打开页面会有弹窗让你填写信息）填写信息，之后再点击编辑的图标就可以随意玩耍啦
+
+如有疑问请报告 issue
+
 ## 如果你想为本项目做贡献
 
 欢迎 PR
 
 ## TODO
 
-- [ ] 在线编辑
+- [x] 在线编辑
 - [ ] 编辑模式支持拖拽
 - [ ] 添加一些好玩的东西，暂时还没想法，如果有什么好的想法欢迎提 issue
 
