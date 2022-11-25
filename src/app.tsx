@@ -7,6 +7,7 @@ import GithubModal from './components/github-modal';
 import Header from './components/header';
 
 import { useDark } from './hooks/use-dark';
+import { useIsGithubPages } from './hooks/use-is-github-pages';
 
 import DataCenterPage from './pages';
 
@@ -15,6 +16,7 @@ const isFirstRenderAtom = atomWithStorage('is-first-render', true);
 export function App() {
   const { currentTheme } = useDark();
   const [isFirstRender, setIsFirstRender] = useAtom(isFirstRenderAtom);
+  const isGithubPages = useIsGithubPages();
 
   return (
     <>
@@ -30,7 +32,7 @@ export function App() {
           }
         }}
       />
-      <GithubModal open={isFirstRender} onClose={() => setIsFirstRender(false)} />
+      <GithubModal open={isFirstRender && isGithubPages} onClose={() => setIsFirstRender(false)} />
     </>
   );
 }
