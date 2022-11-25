@@ -1,4 +1,4 @@
-export interface ServiceCardProps {
+export interface ServiceData {
   name: string
   path: string
   description: string
