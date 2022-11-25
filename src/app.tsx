@@ -1,13 +1,20 @@
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+
 import { Toaster } from 'react-hot-toast';
 
+import GithubModal from './components/github-modal';
 import Header from './components/header';
 
 import { useDark } from './hooks/use-dark';
 
 import DataCenterPage from './pages';
 
+const isFirstRenderAtom = atomWithStorage('is-first-render', true);
+
 export function App() {
   const { currentTheme } = useDark();
+  const [isFirstRender, setIsFirstRender] = useAtom(isFirstRenderAtom);
 
   return (
     <>
@@ -23,6 +30,7 @@ export function App() {
           }
         }}
       />
+      <GithubModal open={isFirstRender} onClose={() => setIsFirstRender(false)} />
     </>
   );
 }

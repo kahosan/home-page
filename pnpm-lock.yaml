@@ -6,6 +6,7 @@ specifiers:
   eslint: ^8.28.0
   eslint-config-kaho: ^0.9.4
   jotai: ^1.10.0
+  js-base64: ^3.7.3
   preact: ^10.11.3
   react-hot-toast: ^2.4.0
   swr: 2.0.0-rc.0
@@ -15,6 +16,7 @@ specifiers:
 
 dependencies:
   jotai: 1.10.0
+  js-base64: 3.7.3
   preact: 10.11.3
   react-hot-toast: 2.4.0
   swr: 2.0.0-rc.0
@@ -2630,6 +2632,10 @@ packages:
         optional: true
       jotai-zustand:
         optional: true
+    dev: false
+
+  /js-base64/3.7.3:
+    resolution: {integrity: sha512-PAr6Xg2jvd7MCR6Ld9Jg3BmTcjYsHEBx1VlwEwULb/qowPf5VD9kEMagj23Gm7JRnSvE/Da/57nChZjnvL8v6A==}
     dev: false
 
   /js-sdsl/4.2.0:

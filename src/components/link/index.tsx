@@ -5,7 +5,7 @@ interface Props {
   children?: preact.ComponentChildren
 }
 
-export function Link({ href, children, ...props }: Props & JSX.IntrinsicElements['a']) {
+export default function Link({ href, children, ...props }: Props & JSX.IntrinsicElements['a']) {
   return (
     <a {...props} href={href} className={`${props?.className || ''} link`}>{children}</a>
   );

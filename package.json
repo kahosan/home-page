@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"jotai": "^1.10.0",
+		"js-base64": "^3.7.3",
 		"preact": "^10.11.3",
 		"react-hot-toast": "^2.4.0",
 		"swr": "2.0.0-rc.0"

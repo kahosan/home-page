@@ -1,22 +1,69 @@
 import { atom, useAtom } from 'jotai';
 
-const editAtom = atom(false);
+import serviceJSON from '../../services.json';
+
+import { useGithubApi, useGithubUserInfo } from './use-github-api';
+import { useIsGithubPages } from './use-is-github-pages';
+import { useServiceData } from './use-service-data';
+import { useToasts } from './use-toasts';
+
+import type { ServiceData } from '@/types/service-card';
+
+const editModeAtom = atom(false);
 
 export function useEditServices() {
-  const [edit, setEdit] = useAtom(editAtom);
+  const [editMode, setEditMode] = useAtom(editModeAtom);
+  const [services, setServices] = useServiceData();
 
-  const handleAddService = () => {
-    // TODO
+  const { setToast } = useToasts();
+
+  const isGithubPages = useIsGithubPages();
+  const [githubUserInfo] = useGithubUserInfo();
+  const { handleUpdateData } = useGithubApi();
+
+  const handleAddService = (newApp: ServiceData) => {
+    if (newApp.name !== '') {
+      setServices(service => [...service, newApp]);
+    } else {
+      setToast({
+        text: '添加的应用不能是空的',
+        type: 'error',
+        delay: 3000
+      });
+    }
   };
 
-  const handleDeleteService = () => {
-    // TODO
+  const handleDeleteService = (name: string) => {
+    setServices(services => services.filter(service => service.name !== name));
+  };
+
+  const handleRestoreService = () => {
+    setServices(serviceJSON);
+  };
+
+  const handleSaveService = () => {
+    handleUpdateData(services);
+  };
+
+  const toggleEditMode = () => {
+    if (isGithubPages && !githubUserInfo?.token) {
+      setToast({
+        text: '请先填写 token 等信息，点击右上角的 Github 图标',
+        type: 'error',
+        delay: 3000
+      });
+      return;
+    }
+
+    setEditMode(!editMode);
   };
 
   return {
-    edit,
-    setEdit,
+    editMode,
+    toggleEditMode,
     handleAddService,
-    handleDeleteService
+    handleDeleteService,
+    handleRestoreService,
+    handleSaveService
   };
 }
