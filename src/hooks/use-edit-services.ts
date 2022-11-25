@@ -1,10 +1,8 @@
 import { atom, useAtom } from 'jotai';
 
-import serviceJSON from '../../services.json';
-
 import { useGithubApi, useGithubUserInfo } from './use-github-api';
 import { useIsGithubPages } from './use-is-github-pages';
-import { useServiceData } from './use-service-data';
+import { useServiceData, useServiceDataBackup } from './use-service-data';
 import { useToasts } from './use-toasts';
 
 import type { ServiceData } from '@/types/service-card';
@@ -14,6 +12,7 @@ const editModeAtom = atom(false);
 export function useEditServices() {
   const [editMode, setEditMode] = useAtom(editModeAtom);
   const [services, setServices] = useServiceData();
+  const [servicesBackup] = useServiceDataBackup();
 
   const { setToast } = useToasts();
 
@@ -38,7 +37,7 @@ export function useEditServices() {
   };
 
   const handleRestoreService = () => {
-    setServices(serviceJSON);
+    setServices(servicesBackup);
   };
 
   const handleSaveService = () => {

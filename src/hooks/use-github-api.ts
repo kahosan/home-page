@@ -9,6 +9,7 @@ import useSWRMutation from 'swr/mutation';
 import { Base64 } from 'js-base64';
 
 import { useToasts } from './use-toasts';
+import { useServiceData, useServiceDataBackup } from './use-service-data';
 
 import { fetcherIsSWRMutationWithToken, fetcherWithToken } from '@/lib/fetcher';
 
@@ -31,6 +32,9 @@ export const useGithubUserInfo = () => useAtom(githubUserInfo);
 export const useGithubApi = () => {
   const [user] = useGithubUserInfo();
   const { setToast } = useToasts();
+
+  const [, setServices] = useServiceData();
+  const [, setServicesBackup] = useServiceDataBackup();
 
   const { data: getFileInfo } = useSWR<GetContentResponse, GetContentError>(
     user?.token && ['https://api.github.com/repos/kahosan/home-page/contents/services.json', user.token],
@@ -76,9 +80,12 @@ export const useGithubApi = () => {
           type: 'success',
           delay: 3000
         });
+
+        setServices(data);
+        setServicesBackup(data);
       });
     }
-  }, [getFileInfo, setToast, updateData, user?.email, user?.owner]);
+  }, [getFileInfo?.sha, setServices, setServicesBackup, setToast, updateData, user?.email, user?.owner]);
 
   return {
     handleUpdateData
