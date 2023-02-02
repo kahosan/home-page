@@ -20,6 +20,8 @@ git clone https://github.com/kahosan/home-page.git ./home-page
 cd home-page && pnpm i # npm i
 ```
 
+将 `.env.example` 改名为 .`env` 然后填写 API_URL 为部署的地址，如 <http://192.168.1.50:3000>
+
 修改根目录的 `services.json` 文件，按照如下格式
 
 ```json5
@@ -67,10 +69,7 @@ fork 本项目，然后会自动运行构建，在仓库的 settings 中将 page
 
 ### 在线编辑应用列表
 
-目前仅支持 Github Pages，需要先创建一个 Token 并具有读写仓库的权限 [点这里](https://github.com/settings/tokens?type=beta)
-然后打开 home-page 页面，点击右上角的 Github 图标（如果是第一次打开页面会有弹窗让你填写信息）填写信息，之后再点击编辑的图标就可以随意玩耍啦
-
-如有疑问请报告 issue
+重写中...
 
 ## 如果你想为本项目做贡献
 
@@ -79,7 +78,6 @@ fork 本项目，然后会自动运行构建，在仓库的 settings 中将 page
 ## TODO
 
 - [x] 在线编辑
-- [ ] 编辑模式支持拖拽
 - [ ] 添加一些好玩的东西，暂时还没想法，如果有什么好的想法欢迎提 issue
 
 ## License

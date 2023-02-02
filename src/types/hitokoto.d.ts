@@ -1,4 +1,4 @@
-export interface Hitokoto {
+export interface HitokotoRespones {
   id: number
   uuid: string
   hitokoto: string

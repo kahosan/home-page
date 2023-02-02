@@ -1,3 +1,35 @@
 {
-  "extends": ["kaho/ts", "kaho/react"]
+  "extends": [
+    "next"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "extends": [
+        "kaho/react",
+        "kaho/ts"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      }
+    }
+  ],
+  "settings": {
+    "node": {
+      "resolvePaths": [
+        "__dirname"
+      ],
+      "tryExtensions": [
+        ".js",
+        ".json",
+        ".node",
+        ".ts",
+        ".d.ts",
+        ".tsx"
+      ]
+    }
+  }
 }

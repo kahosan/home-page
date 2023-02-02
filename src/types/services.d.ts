@@ -1,4 +1,4 @@
-export interface ServiceData {
+export interface Service {
   name: string
   path: string
   description: string

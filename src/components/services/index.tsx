@@ -1,13 +1,11 @@
 import ServiceCard from '../service-card';
 
-import { useServiceData } from '@/hooks/use-service-data';
+import type { Service } from 'src/types/services';
 
-export default function Services() {
-  const [services] = useServiceData();
-
+export default function Services({ servicesData }: { servicesData: Service[] }) {
   return (
     <>
-      {services.map(service => <ServiceCard {...service} key={service.name} />)}
+      {servicesData.map(service => <ServiceCard {...service} key={service.name} />)}
     </>
   );
 }

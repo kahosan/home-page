@@ -9,6 +9,7 @@ export default defineConfig({
   rules: [
     ['blur-bg', { 'backdrop-filter': 'blur(12px)' }],
     ['i-link', {
+      color: 'inherit',
       padding: '2px 0',
       margin: 'auto 4px',
       cursor: 'pointer',
