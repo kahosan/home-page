@@ -1,9 +1,11 @@
 import { readFile, writeFile } from 'fs/promises';
+
+import { tmpdir } from 'os';
 import path from 'path';
 
 import type { Service } from 'src/types/services';
 
-const filePath = process.env.FILE_PATH || `${path.resolve()}/services.json`;
+const filePath = process.env.FILE_PATH ? tmpdir() + process.env.FILE_PATH : `${path.resolve()}/services.json`;
 
 export const getServicesData = async () => {
   return JSON.parse(await readFile(filePath, { encoding: 'utf-8' })) as Service[];
