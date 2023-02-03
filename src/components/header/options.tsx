@@ -26,7 +26,7 @@ export default function Options() {
     <>
       <div onClick={() => setVisible(true)} className={`${isEdit ? 'visible op-100' : 'invisible op-0'} transition-all i-carbon-task-add text-5 mr-3 cursor-pointer opacity-animation-3`} />
       <div onClick={() => toggleEditMode()} className={`${isEdit ? 'i-carbon-edit-off' : 'i-carbon-edit'} text-5 cursor-pointer icon-tap-color mr-3 opacity-animation-3 `} />
-      <Modal visible={visible}>
+      <Modal visible={visible} disableBackdropClick>
         <Modal.Title>添加卡片</Modal.Title>
         <Modal.Subtitle>所有选项都必填</Modal.Subtitle>
         <Modal.Content className="!mx-auto">
