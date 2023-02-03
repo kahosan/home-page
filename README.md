@@ -20,7 +20,7 @@ git clone https://github.com/kahosan/home-page.git ./home-page
 cd home-page && pnpm i # npm i
 ```
 
-将 `.env.example` 改名为 .`env` 然后填写你所想更改的字段
+将 `.env.example` 改名为 `.env` 然后填写你所想更改的字段
 
 修改根目录的 `services.json` 文件，按照如下格式。也可以部署后在网页端添加
 
@@ -50,7 +50,7 @@ pnpm run build # npm run build
 然后运行
 
 ```bash
-pnpm run start # -port 8765 可以这样选择端口
+pnpm run start # -p 8765 可以这样选择端口
 ```
 
 可以使用 nginx 代理，也可以直接输入部署服务器的 IP 和端口号直接访问
