@@ -2,7 +2,7 @@
 
 ![normal](.github/image/normal.png)
 
-![edit](.github/image/editmode.png)
+![edit](.github/image/edit.png)
 
 <p align="center">一个简洁的 NAS 主页 & 导航页</p>
 
@@ -20,9 +20,9 @@ git clone https://github.com/kahosan/home-page.git ./home-page
 cd home-page && pnpm i # npm i
 ```
 
-将 `.env.example` 改名为 .`env` 然后填写 API_URL 为部署的地址，如 <http://192.168.1.50:3000>
+将 `.env.example` 改名为 .`env` 然后填写你所想更改的字段
 
-修改根目录的 `services.json` 文件，按照如下格式
+修改根目录的 `services.json` 文件，按照如下格式。也可以部署后在网页端添加
 
 ```json5
 [
@@ -35,7 +35,7 @@ cd home-page && pnpm i # npm i
 ]
 ```
 
-其中，`icon`，需要在 [这里](https://icones.js.org/collection/carbon) 找到你喜欢的图标，点击它会有一个类似 carbon:xxx 的字符串，将 xxx 这行字符串填入 `icon` 字段即可。目前只支持 `carbon`
+其中，`icon`，需要在 [这里](https://icones.js.org/collection/carbon) 找到你喜欢的图标，点击它会有一个类似 carbon:xxx 的字符串，右边有一个小小的复制按钮，点一下粘贴到 `icon` 字段即可。目前只支持 `carbon`
 
 **footer 的 blog、twiiter 链接地址在 .env 文件中修改**
 
@@ -47,21 +47,21 @@ cd home-page && pnpm i # npm i
 pnpm run build # npm run build
 ```
 
-可以把 build 出来的 dist 文件夹丢到 nginx 的部署目录，或者直接用 `pnpm run serve` 来启动一个本地服务器。后面加上 `--port 端口` 来指定端口。
+然后运行
 
-> 每次修改完 `services.json` 需要重新运行 build 命令。在线编辑功能还在开发中。
+```bash
+pnpm run start # -port 8765 可以这样选择端口
+```
 
-### 使用 Github Pages
+可以使用 nginx 代理，也可以直接输入部署服务器的 IP 和端口号直接访问
 
-fork 本项目，然后会自动运行构建，在仓库的 settings 中将 pages 设置为 `gh-pages` 分支就可以了
+### 使用 Vercel
 
-域名为 `https://<你的用户名>.github.io/home-page`，想用 vercel、netlify 之类的服务也都是随你喜欢啦
-
-> 配置参照上文，同样修改 `services.json` 后需要触发一次构建。
+fork 本项目，然后导入到 vercel 中，环境变量需要根据 .env 文件中的需要，手动输入到 vercel 的项目设置里
 
 ### 修改自定义背景
 
-把你想自定义的背景图放到 `public` 目录，然后修改 `src/index.css` 中最下面的 `.custom-bg` 的配置。需要会一点点的 css 知识
+把你想自定义的背景图放到 `public` 目录替换 `bg.png` 文件，然后修改 `src/index.css` 中最下面的 `.custom-bg` 的配置。需要会一点点的 css 知识
 
 ### 自定义 Title
 
@@ -69,7 +69,9 @@ fork 本项目，然后会自动运行构建，在仓库的 settings 中将 page
 
 ### 在线编辑应用列表
 
-重写中...
+点击右上角的铅笔按钮。
+
+如果部署在 vercel，存储的数据是在 `/tmp` 目录中，可能会丢失数据，本地部署则为修改 `services.json` 文件。
 
 ## 如果你想为本项目做贡献
 
@@ -78,6 +80,7 @@ fork 本项目，然后会自动运行构建，在仓库的 settings 中将 page
 ## TODO
 
 - [x] 在线编辑
+- [ ] 导入导出功能
 - [ ] 添加一些好玩的东西，暂时还没想法，如果有什么好的想法欢迎提 issue
 
 ## License
