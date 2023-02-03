@@ -1,1 +1,68 @@
-[{"name":"aria2","description":"HTTP 下载器","icon":"download","path":"https://github.com/aria2/aria2"},{"name":"adguard home","description":"广告拦截以及 DNS 服务器","icon":"dns-services","path":"https://github.com/AdguardTeam/AdGuardHome"},{"name":"asmr one","description":"在线音声服务","icon":"music","path":"/asmr"},{"name":"code server","description":"VS Code 在线编辑器","icon":"code","path":"https://github.com/coder/code-server"},{"name":"bgmi","description":"动画片自动下载机 功能强大","icon":"data-player","path":"https://github.com/BGmi/BGmi"},{"name":"qbittorrent","description":"torrent 下载器","icon":"share","path":"https://github.com/qbittorrent/qBittorrent"},{"name":"syncthing","description":"功能强大的去中心化备份同步工具","icon":"data-backup","path":"https://syncthing.net"},{"name":"transmission","description":"PT 专用下载器","icon":"share","path":"https://transmissionbt.com"},{"name":"漏油器","description":"正在漏油","path":"http://192.168.1.1","icon":"server-dns"},{"name":"示例卡片","path":"/tmp","description":"这是一个示例","icon":"logo-react"},{"name":"示例卡片2","path":"/tmp","description":"这是另一个示例","icon":"logo-react"}]
+[
+  {
+    "name": "aria2",
+    "description": "HTTP 下载器",
+    "icon": "download",
+    "path": "https://github.com/aria2/aria2"
+  },
+  {
+    "name": "adguard home",
+    "description": "广告拦截以及 DNS 服务器",
+    "icon": "dns-services",
+    "path": "https://github.com/AdguardTeam/AdGuardHome"
+  },
+  {
+    "name": "asmr one",
+    "description": "在线音声服务",
+    "icon": "music",
+    "path": "/asmr"
+  },
+  {
+    "name": "code server",
+    "description": "VS Code 在线编辑器",
+    "icon": "code",
+    "path": "https://github.com/coder/code-server"
+  },
+  {
+    "name": "bgmi",
+    "description": "动画片自动下载机 功能强大",
+    "icon": "data-player",
+    "path": "https://github.com/BGmi/BGmi"
+  },
+  {
+    "name": "qbittorrent",
+    "description": "torrent 下载器",
+    "icon": "share",
+    "path": "https://github.com/qbittorrent/qBittorrent"
+  },
+  {
+    "name": "syncthing",
+    "description": "功能强大的去中心化备份同步工具",
+    "icon": "data-backup",
+    "path": "https://syncthing.net"
+  },
+  {
+    "name": "transmission",
+    "description": "PT 专用下载器",
+    "icon": "share",
+    "path": "https://transmissionbt.com"
+  },
+  {
+    "name": "漏油器",
+    "description": "正在漏油",
+    "path": "http://192.168.1.1",
+    "icon": "server-dns"
+  },
+  {
+    "name": "示例卡片",
+    "path": "/tmp",
+    "description": "这是一个示例",
+    "icon": "logo-react"
+  },
+  {
+    "name": "示例卡片2",
+    "path": "/tmp",
+    "description": "这是另一个示例",
+    "icon": "logo-react"
+  }
+]

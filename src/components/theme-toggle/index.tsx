@@ -1,14 +1,20 @@
-import { useCallback } from 'preact/hooks';
-import { useDark } from '../../hooks/use-dark';
+import { useCallback } from 'react';
+
+import { useAtom } from 'jotai';
+import { themeAtom } from 'src/pages/_app';
 
 export default function ThemeToggle() {
-  const { currentTheme, setTheme } = useDark();
+  const [themeType, setTheme] = useAtom(themeAtom);
 
   const toggle = useCallback(() => {
-    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-  }, [currentTheme, setTheme]);
+    const theme = themeType === 'dark' ? 'light' : 'dark';
+    setTheme(theme);
+
+    document.documentElement.classList.remove('dark', 'light');
+    document.documentElement.classList.add(theme);
+  }, [themeType, setTheme]);
 
   return (
-    <div onClick={toggle} className={`${currentTheme === 'dark' ? 'i-carbon-sun' : 'i-carbon-moon'} text-5 cursor-pointer opacity-animation-3 icon-tap-color`} />
+    <div onClick={toggle} className="dark:i-carbon-sun i-carbon-moon text-5 cursor-pointer opacity-animation-3 icon-tap-color" />
   );
 }

@@ -1,8 +1,6 @@
-import type { JSX } from 'preact/jsx-runtime';
-
 interface Props {
   href?: string
-  children?: preact.ComponentChildren
+  children?: React.ReactNode
 }
 
 export default function Link({ href, children, ...props }: Props & JSX.IntrinsicElements['a']) {

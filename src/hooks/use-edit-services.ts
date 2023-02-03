@@ -1,68 +1,95 @@
+import { useToasts } from '@geist-ui/core';
+
 import { atom, useAtom } from 'jotai';
+import { useServices } from './use-services';
 
-import { useGithubApi, useGithubUserInfo } from './use-github-api';
-import { useIsGithubPages } from './use-is-github-pages';
-import { useServiceData, useServiceDataBackup } from './use-service-data';
-import { useToasts } from './use-toasts';
+import { validateFormDataForService } from 'src/lib/utils';
 
-import type { ServiceData } from '@/types/service-card';
+import type { Service } from 'src/types/services';
 
-const editModeAtom = atom(false);
+export const isEditAtom = atom(false);
 
-export function useEditServices() {
-  const [editMode, setEditMode] = useAtom(editModeAtom);
-  const [services, setServices] = useServiceData();
-  const [servicesBackup] = useServiceDataBackup();
-
+export const useEditServices = () => {
+  const [isEdit, setIsEdit] = useAtom(isEditAtom);
   const { setToast } = useToasts();
+  const { update } = useServices();
 
-  const isGithubPages = useIsGithubPages();
-  const [githubUserInfo] = useGithubUserInfo();
-  const { handleUpdateData } = useGithubApi();
+  const toggleEditMode = () => setIsEdit(!isEdit);
 
-  const handleAddService = (newApp: ServiceData) => {
-    if (newApp.name !== '') {
-      setServices(service => [...service, newApp]);
-    } else {
+  const handlerAddService = async (service: Service | undefined, closeModal: () => void) => {
+    // validate data
+    const result = validateFormDataForService(service);
+
+    if (result) {
       setToast({
-        text: '添加的应用不能是空的',
+        text: result,
         type: 'error',
-        delay: 3000
-      });
-    }
-  };
-
-  const handleDeleteService = (name: string) => {
-    setServices(services => services.filter(service => service.name !== name));
-  };
-
-  const handleRestoreService = () => {
-    setServices(servicesBackup);
-  };
-
-  const handleSaveService = () => {
-    handleUpdateData(services);
-  };
-
-  const toggleEditMode = () => {
-    if (isGithubPages && !githubUserInfo?.token) {
-      setToast({
-        text: '请先填写 token 等信息，点击右上角的 Github 图标',
-        type: 'error',
-        delay: 3000
+        delay: 4000
       });
       return;
     }
 
-    setEditMode(!editMode);
+    try {
+      const res = await fetch('/api/services/add', { method: 'POST', body: JSON.stringify(service) });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.msg);
+      }
+
+      closeModal();
+      // refetch data
+      update();
+
+      setToast({
+        text: data.msg,
+        delay: 4000
+      });
+    } catch (e) {
+      if (e instanceof Error) {
+        setToast({
+          text: e.message,
+          type: 'error',
+          delay: 3000
+        });
+
+        console.error(e);
+      }
+    }
+  };
+
+  const handleDeleteService = async (targetName: string) => {
+    try {
+      const res = await fetch('/api/services/del', { method: 'POST', body: targetName });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.msg);
+      }
+
+      // refetch data
+      update();
+      setToast({
+        text: data.msg,
+        delay: 4000
+      });
+    } catch (e) {
+      if (e instanceof Error) {
+        setToast({
+          text: e.message,
+          type: 'error',
+          delay: 3000
+        });
+
+        console.error(e);
+      }
+    }
   };
 
   return {
-    editMode,
+    isEdit,
     toggleEditMode,
-    handleAddService,
     handleDeleteService,
-    handleRestoreService,
-    handleSaveService
+    handlerAddService
   };
-}
+};

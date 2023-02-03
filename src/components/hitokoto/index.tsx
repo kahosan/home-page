@@ -1,18 +1,26 @@
-import { useAnimeHitokoto } from '@/hooks/use-anime-hitokoto';
+import { Loading } from '@geist-ui/core';
+import { useHitokoto } from 'src/hooks/use-hitokoto';
 
 export default function Hitokoto() {
-  const { data, error } = useAnimeHitokoto();
+  const { data, error } = useHitokoto();
 
   return (
     error
       ? <p>一言加载失败</p>
-      : (
-        <>
-          {data?.hitokoto}
-          <div className="text-0.75rem pt-2 pr-2 op-60">
-            来源: {data?.from}
+      : data?.hitokoto
+        ? (
+          <>
+            {data?.hitokoto}
+            <p className="text-0.75rem my-1 op-60">
+              来源: {data?.from}
+            </p>
+          </>
+        )
+        : (
+          <div className="">
+            一言加载中
+            <Loading />
           </div>
-        </>
-      )
+        )
   );
 }
