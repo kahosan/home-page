@@ -7,7 +7,12 @@ import type { Service } from 'src/types/services';
 const filePath = process.env.FILE_PATH ? tmpdir() + process.env.FILE_PATH : `${path.resolve()}/services.json`;
 
 export const getServicesData = () => {
-  return JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' })) as Service[];
+  try {
+    const data = fs.readFileSync(filePath, { encoding: 'utf-8' });
+    return JSON.parse(data) as Service[];
+  } catch {
+    return [];
+  }
 };
 
 export const addServicesData = (service: Service) => {
