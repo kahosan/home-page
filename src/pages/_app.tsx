@@ -31,17 +31,14 @@ export default function App({ Component, pageProps }: AppProps) {
   const isSystemThemeDark = useMediaQuery('(prefers-color-scheme: dark)');
 
   useEffect(() => {
-    if (isBrowser) {
+    if (isBrowser && isSystemThemeDark) {
       const storedTheme = localStorage.getItem('theme') as 'dark' | 'light';
+      const systemTheme = isSystemThemeDark ? 'dark' : 'light';
+
       if (storedTheme) {
         setTheme(storedTheme);
-      }
-
-      const htmlElClassList = document.documentElement.classList;
-
-      if (!htmlElClassList.value) {
-        htmlElClassList.remove('dark', 'light');
-        htmlElClassList.add(theme);
+      } else {
+        setTheme(systemTheme);
       }
     }
   }, [isSystemThemeDark, setTheme, theme]);
