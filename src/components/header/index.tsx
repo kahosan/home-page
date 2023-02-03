@@ -1,18 +1,10 @@
-import { useState } from 'react';
-
 import { Divider } from '@geist-ui/core';
-
-import { useAtom } from 'jotai';
 
 import ThemeToggle from '../theme-toggle';
 
 import Options from './options';
 
-import { themeAtom } from 'src/pages/_app';
-
 export default function Header() {
-  const [themeType] = useAtom(themeAtom);
-
   return (
     <header className="fixed top-0 right-0 left-0 z-999 blur-bg">
       <div className="flex justify-between items-center p-4 max-w-5xl mx-auto h-60px">
@@ -22,7 +14,8 @@ export default function Header() {
           <ThemeToggle />
         </div>
       </div>
-      <Divider className={`!m-0 ${themeType === 'IDark' ? 'op-60' : ''}`} />
+      <div className="w-100% border-b border-current absolute top-60px op-5" />
+      <Divider className="!m-0 dark:op-80 !dark:bg-#1D1D1D" />
     </header>
   );
 }

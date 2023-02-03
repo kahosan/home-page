@@ -5,30 +5,30 @@ import { generatorRespError } from 'src/utils/handler';
 import { addServicesData, delServicesData } from 'src/utils/services';
 
 const addHandler: Handler = async (req, res) => {
-  const data = req.body as Service;
+  const data = JSON.parse(req.body) as Service;
 
   if (!data) {
-    res.status(400).json(generatorRespError('service data cannot be empty'));
+    res.status(400).json(generatorRespError('数据不能为空'));
   }
 
   await addServicesData(data);
-  res.status(200).json({ msg: `add ${data.name} success` });
+  res.status(200).json({ msg: `添加 ${data.name} 成功` });
 };
 
 const delHandler: Handler = async (req, res) => {
   const data = req.body;
 
   if (!data) {
-    res.status(400).json(generatorRespError('target cannot be empty'));
+    res.status(400).json(generatorRespError('删除的目标卡片名为空'));
   }
 
   await delServicesData(data);
-  res.status(200).json({ msg: `del ${data} success` });
+  res.status(200).json({ msg: `删除 ${data} 成功` });
 };
 
 const handler: Handler = async (req, res) => {
   if (req.method !== 'POST') {
-    res.status(405).json(generatorRespError(`method ${req.method} not supported`));
+    res.status(405).json(generatorRespError(`请求方法 ${req.method} 不支持`));
   } else {
     const editMethod = req.query.method as EditMethod;
 
@@ -37,7 +37,7 @@ const handler: Handler = async (req, res) => {
     } else if (editMethod === 'del') {
       delHandler(req, res);
     } else {
-      res.status(400).json(generatorRespError(`edit method ${editMethod} not supported`));
+      res.status(400).json(generatorRespError(`不支持 ${editMethod} 方法`));
     }
   }
 };

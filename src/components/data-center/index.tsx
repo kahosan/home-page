@@ -1,12 +1,10 @@
-import { useAtom } from 'jotai';
+import { Loading } from '@geist-ui/core';
 
 import Footer from '../footer';
 import Hitokoto from '../hitokoto';
-import Services from '../services';
+import ServiceCard from '../service-card';
 
-import { themeAtom } from 'src/pages/_app';
-import ErrorHandler from 'src/pages/error';
-import type { Service } from 'src/types/services';
+import { useServices } from 'src/hooks/use-services';
 
 function DateTag() {
   const date = new Date();
@@ -28,8 +26,8 @@ function DateTag() {
   );
 }
 
-export default function DataCenter({ servicesData }: { servicesData: Service[] }) {
-  const [themeType] = useAtom(themeAtom);
+export default function DataCenter() {
+  const { servicesData } = useServices();
 
   return (
     <div className="min-h-100vh pt-70px px-4 max-w-5xl mx-auto relative pb-70">
@@ -42,19 +40,19 @@ export default function DataCenter({ servicesData }: { servicesData: Service[] }
           <Hitokoto />
         </div>
       </div>
-      <div className={`mt-5 p-4 w-full rd-2 ${themeType === 'IDark' ? 'bg-dark-box-background' : 'bg-box-background'}`}>
+      <section className="mt-5 p-4 w-full rd-2 dark:bg-dark-box-background bg-box-background">
         {
           (servicesData && servicesData.length !== 0)
             ? (
               <div className="grid grid-cols-4 lt-md:grid-cols-2 ">
-                <Services servicesData={servicesData} />
+                {servicesData.map(service => <ServiceCard {...service} key={service.name} />)}
               </div>
             )
             : (
-              <ErrorHandler error={new Error('services card load error')} />
+              <Loading />
             )
         }
-      </div>
+      </section>
       <Footer />
     </div>
   );

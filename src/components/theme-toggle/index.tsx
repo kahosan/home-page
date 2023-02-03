@@ -7,10 +7,14 @@ export default function ThemeToggle() {
   const [themeType, setTheme] = useAtom(themeAtom);
 
   const toggle = useCallback(() => {
-    setTheme(themeType === 'IDark' ? 'ILight' : 'IDark');
+    const theme = themeType === 'dark' ? 'light' : 'dark';
+    setTheme(theme);
+
+    document.documentElement.classList.remove('dark', 'light');
+    document.documentElement.classList.add(theme);
   }, [themeType, setTheme]);
 
   return (
-    <div onClick={toggle} className={`${themeType === 'IDark' ? 'i-carbon-sun' : 'i-carbon-moon'} text-5 cursor-pointer opacity-animation-3 icon-tap-color`} />
+    <div onClick={toggle} className="dark:i-carbon-sun i-carbon-moon text-5 cursor-pointer opacity-animation-3 icon-tap-color" />
   );
 }

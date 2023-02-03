@@ -1,5 +1,3 @@
-import { CssBaseline } from '@geist-ui/core';
-
 import type { DocumentContext, DocumentInitialProps } from 'next/document';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
@@ -8,6 +6,20 @@ const MyDocument = () => {
     <Html>
       <Head />
       <body className="transition-color duration-300">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            (function(){
+              if (!window.localStorage) return;
+              if (window.localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.add('light');
+              };
+            })()
+          `
+          }}
+        />
         <Main />
         <NextScript />
       </body>
@@ -17,15 +29,8 @@ const MyDocument = () => {
 
 MyDocument.getInitialProps = async (ctx: DocumentContext): Promise<DocumentInitialProps> => {
   const initialProps = await Document.getInitialProps(ctx);
-  const styles = CssBaseline.flush();
   return {
-    ...initialProps,
-    styles: (
-      <>
-        {initialProps.styles}
-        {styles}
-      </>
-    )
+    ...initialProps
   };
 };
 
