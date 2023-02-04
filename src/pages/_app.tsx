@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const isSystemThemeDark = useMediaQuery('(prefers-color-scheme: dark)');
 
   useEffect(() => {
-    if (isBrowser && isSystemThemeDark) {
+    if (isBrowser && isSystemThemeDark !== undefined) {
       const storedTheme = localStorage.getItem('theme') as 'dark' | 'light';
       const systemTheme = isSystemThemeDark ? 'dark' : 'light';
 
@@ -41,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
         setTheme(systemTheme);
       }
     }
-  }, [isSystemThemeDark, setTheme, theme]);
+  }, [isSystemThemeDark, setTheme]);
 
   return (
     <GeistProvider themeType={theme}>
