@@ -1,28 +1,38 @@
 import { Loading } from '@geist-ui/core';
 
+import { useEffect, useState } from 'react';
+
 import Footer from '../footer';
 import Hitokoto from '../hitokoto';
 import ServiceCard from '../service-card';
 
 import { useServices } from 'src/hooks/use-services';
+import { isBrowser } from 'src/lib/utils';
 
 function DateTag() {
-  const date = new Date();
+  const [dateText, setDateText] = useState('');
 
-  const day = {
-    0: '星期日',
-    1: '星期一',
-    2: '星期二',
-    3: '星期三',
-    4: '星期四',
-    5: '星期五',
-    6: '星期六'
-  } as const;
+  useEffect(() => {
+    // 客户端与服务端时间不一致会导致水合失败报错
+    // https://github.com/vercel/next.js/discussions/39425
+    if (isBrowser) {
+      const day = {
+        0: '星期日',
+        1: '星期一',
+        2: '星期二',
+        3: '星期三',
+        4: '星期四',
+        5: '星期五',
+        6: '星期六'
+      } as const;
+      const date = new Date();
 
-  const text = `${date.getFullYear()} 年 ${date.getMonth() + 1} 月 ${date.getDate()} 日 ${day[date.getDay() as keyof typeof day]}`;
+      setDateText(`${date.getFullYear()} 年 ${date.getMonth() + 1} 月 ${date.getDate()} 日 ${day[date.getDay() as keyof typeof day]}`);
+    }
+  }, [setDateText]);
 
   return (
-    <p className="op-60 my-1 text-3">{text}</p>
+    <p className="op-60 my-1 text-3">{dateText}</p>
   );
 }
 
