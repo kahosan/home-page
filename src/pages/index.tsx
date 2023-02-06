@@ -7,7 +7,7 @@ import DataCenter from '../components/data-center';
 
 import type { Service } from 'src/types/services';
 
-export default function HomePage({ fallback }: { fallback: Service[] }) {
+export default function HomePage({ fallback }: { fallback: { '/api/services': Service[] } }) {
   return (
     <SWRConfig value={{ fallback }}>
       <Head>
@@ -20,7 +20,7 @@ export default function HomePage({ fallback }: { fallback: Service[] }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(`${process.env.API_URL}/api/services`);
   const servicesData = await res.json();
 
