@@ -5,6 +5,8 @@
 }
 
 html {
+  background-color: #f1f1f1;
+  color: #1d1d1d;
   overflow: auto;
 }
 
@@ -12,11 +14,6 @@ html.dark {
   background-color: #0c0c0c;
   color: #e2e2e2;
   color-scheme: dark;
-}
-
-html.light {
-  background-color: #f1f1f1;
-  color: #1d1d1d;
 }
 
 body {

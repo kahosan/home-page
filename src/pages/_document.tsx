@@ -10,15 +10,14 @@ const MyDocument = () => {
           dangerouslySetInnerHTML={{
             __html: `
             (function(){
-              const theme = window.localStorage.getItem('theme')
-              const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
               if (!window.localStorage) return;
-              if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-              } else if (theme === 'light') {
-                document.documentElement.classList.add('light');
-              } else {
+
+              const theme = window.localStorage.getItem('theme')
+              const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : ''
+              if (theme !== 'dark' && theme !== 'light') {
                 document.documentElement.classList.add(systemTheme);
+              } else if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
               };
             })()
           `
