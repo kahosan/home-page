@@ -21,7 +21,7 @@ export const addServicesData = async (service: Service) => {
   await fs.writeFile(filePath, JSON.stringify(servicesData, null, 2));
 };
 
-export const delServicesData = async (target: string) => {
+export const deleteServicesData = async (target: string) => {
   const servicesData = await getServicesData();
   const newData = servicesData.filter(service => service.name !== target);
 
