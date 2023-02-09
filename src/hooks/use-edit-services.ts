@@ -64,7 +64,7 @@ export const useEditServices = () => {
 
   const handleDeleteService = async (targetName: string) => {
     try {
-      const res = await fetch('/api/services/del', { method: 'POST', body: targetName });
+      const res = await fetch('/api/services/delete', { method: 'POST', body: targetName });
       const data = await res.json();
 
       if (!res.ok) {

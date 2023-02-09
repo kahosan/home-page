@@ -56,7 +56,7 @@ const handler: Handler = (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json(generatorRespError(`请求方法 ${req.method} 不支持`));
   } else {
-    const action = req.query.method as Action;
+    const action = req.query.action as Action;
 
     if (action === 'add') {
       addHandler(req, res);
