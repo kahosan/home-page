@@ -21,8 +21,12 @@ export default function HomePage({ fallback }: { fallback: { '/api/services': Se
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`${process.env.API_URL}/api/services`);
-  const servicesData = await res.json();
+  let servicesData = [];
+
+  if (process.env.API_URL !== '' && process.env.API_URL !== undefined) {
+    const res = await fetch(`${process.env.API_URL}/api/services`);
+    servicesData = await res.json();
+  }
 
   return {
     props: {
