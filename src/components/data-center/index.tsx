@@ -1,11 +1,12 @@
 import { Loading } from '@geist-ui/core';
 
-import { useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Footer from '../footer';
 import Hitokoto from '../hitokoto';
 import ServiceCard from '../service-card';
 
+import { useIsomorphicLayoutEffect } from 'src/hooks/use-isomorphic-layout-effect';
 import { useServices } from 'src/hooks/use-services';
 import { isBrowser } from 'src/lib/utils';
 
@@ -13,8 +14,8 @@ function DateTag() {
   const [dateText, setDateText] = useState('loading...');
 
   // 提前渲染防止渲染时 text 的闪现
-  useLayoutEffect(() => {
-    // 客户端与服务端时间不一致会导致水合失败报错
+  useIsomorphicLayoutEffect(() => {
+    // 客户端与服务端时间不一致会导致水合失败报错 仅在 SSG 模式下 这里是为了以客户端时间为准
     // https://github.com/vercel/next.js/discussions/39425
     if (isBrowser) {
       const day = {
