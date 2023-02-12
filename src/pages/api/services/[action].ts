@@ -2,7 +2,7 @@ import type { Action, Handler } from 'src/types/next-handler';
 import type { Service } from 'src/types/services';
 
 import { generatorRespError } from 'src/utils/handler';
-import { addServicesData, deleteServicesData, editServiceData } from 'src/utils/services';
+import { addServicesData, deleteServicesData, editServiceData, updateServiceData } from 'src/utils/services';
 
 const addHandler: Handler = async (req, res) => {
   const data = JSON.parse(req.body) as Service;
@@ -52,6 +52,22 @@ const editHandler: Handler = async (req, res) => {
   res.status(200).json({ msg: `编辑 ${data.oldName} 成功` });
 };
 
+const updateHandler: Handler = async (req, res) => {
+  const data = JSON.parse(req.body) as Service[];
+
+  if (!data) {
+    res.status(400).json(generatorRespError('数据不能为空'));
+  }
+
+  try {
+    await updateServiceData(data);
+  } catch {
+    res.status(500).json(generatorRespError('服务器错误'));
+  }
+
+  res.status(200).json({ msg: '更新成功' });
+};
+
 const handler: Handler = (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json(generatorRespError(`请求方法 ${req.method} 不支持`));
@@ -64,6 +80,8 @@ const handler: Handler = (req, res) => {
       deleteHandler(req, res);
     } else if (action === 'edit') {
       editHandler(req, res);
+    } else if (action === 'update') {
+      updateHandler(req, res);
     } else {
       res.status(400).json(generatorRespError(`不支持 ${action}`));
     }

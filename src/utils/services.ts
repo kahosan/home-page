@@ -36,3 +36,7 @@ export const editServiceData = async (service: Service & { oldName: string }) =>
 
   await fs.writeFile(filePath, JSON.stringify(newData, null, 2));
 };
+
+export const updateServiceData = async (services: Service[]) => {
+  await fs.writeFile(filePath, JSON.stringify(services, null, 2));
+};

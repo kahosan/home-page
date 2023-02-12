@@ -1,5 +1,7 @@
 import { Divider } from '@geist-ui/core';
 
+import NextLink from 'next/link';
+
 import ThemeToggle from '../theme-toggle';
 
 import Options from './options';
@@ -12,6 +14,9 @@ export default function Header() {
         <div className="flex items-baseline">
           <Options />
           <ThemeToggle />
+          <NextLink href="/settings">
+            <div className="i-carbon-settings text-5 cursor-pointer icon-tap-color opacity-animation-3 " />
+          </NextLink>
         </div>
       </div>
       <div className="w-100% border-b border-current absolute top-60px op-5" />

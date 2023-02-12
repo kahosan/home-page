@@ -19,6 +19,6 @@ export default function ThemeToggle() {
   }, [themeType, setTheme]);
 
   return (
-    <div onClick={toggle} className="dark:i-carbon-sun i-carbon-moon text-5 cursor-pointer opacity-animation-3 icon-tap-color" />
+    <div onClick={toggle} className="dark:i-carbon-sun i-carbon-moon text-5 cursor-pointer mr-3 opacity-animation-3 icon-tap-color" />
   );
 }
