@@ -1,6 +1,6 @@
 export const fetcher = (url: string) => fetch(url).then(res => res.json());
 
-export const ONEDRIVE_DRIVE_API = 'https://graph.microsoft.com/v1.0/me/drive';
+export const ONEDRIVE_DRIVE_API = 'https://graph.microsoft.com/v1.0/me/drive/';
 
 export class HTTPError extends Error {
   info: unknown;

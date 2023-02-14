@@ -30,11 +30,11 @@ export const useEditServices = () => {
 
   const handlerAddService = async (service: Service | undefined, closeModal: () => void) => {
     // validate data
-    const result = validateFormDataForService(service);
+    const error = validateFormDataForService(service);
 
-    if (result) {
+    if (error) {
       setToast({
-        text: result,
+        text: error,
         type: 'error',
         delay: 4000
       });
@@ -116,11 +116,28 @@ export const useEditServices = () => {
     }
   };
 
+  const handleUpdateServices = async (services: Service[]) => {
+    try {
+      const res = await fetch('/api/services/update', { method: 'POST', body: JSON.stringify(services) });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.msg);
+      }
+
+      // refetch data
+      update();
+    } catch (e) {
+      errorHandler(e);
+    }
+  };
+
   return {
     isEdit,
     toggleEditMode,
     handleDeleteService,
     handlerAddService,
-    handleEditService
+    handleEditService,
+    handleUpdateServices
   };
 };

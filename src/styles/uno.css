@@ -2172,7 +2172,6 @@
 @media (max-width: 767.9px){
 .lt-md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr));}
 .lt-md\:\!mb-4{margin-bottom:1rem !important;}
-.lt-md\:mt-4{margin-top:1rem;}
 .lt-md\:w-50\%{width:50%;}
 }
 @media (min-width: 768px){

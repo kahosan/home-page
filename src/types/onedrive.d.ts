@@ -16,3 +16,67 @@ export interface RequestTokenResponse {
   scope: string
   token_type: string
 }
+
+export interface ResourceError {
+  error: {
+    code: string
+    message: string
+    innererror: {
+      code: string
+    }
+  }
+}
+
+export interface UploadResponse {
+  "@odata.context": string
+  "@microsoft.graph.downloadUrl": string
+  createdDateTime: string
+  cTag: string
+  eTag: string
+  id: string
+  lastModifiedDateTime: string
+  name: string
+  size: number
+  webUrl: string
+  reactions: {
+    commentCount: number
+  }
+  createdBy: {
+    application: {
+      displayName: string
+      id: string
+    }
+    user: {
+      displayName: string
+      id: string
+    }
+  }
+  lastModifiedBy: {
+    application: {
+      displayName: string
+      id: string
+    }
+    user: {
+      displayName: string
+      id: string
+    }
+  }
+  parentReference: {
+    driveId: string
+    driveType: string
+    id: string
+    path: string
+  }
+  file: {
+    mimeType: string
+    hashes: {
+      quickXorHash: string
+      sha1Hash: string
+      sha256Hash: string
+    }
+  }
+  fileSystemInfo: {
+    createdDateTime: string
+    lastModifiedDateTime: string
+  }
+}
