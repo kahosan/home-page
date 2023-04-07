@@ -14,7 +14,7 @@ export default function Footer() {
           <p className="mr-4px mb-1">由<Link href="https://github.com/kahosan/home-page">Home-Page</Link>强力驱动</p>
           <span className="op-100">©&nbsp;{getYear(new Date())} </span>
           PowerBy&nbsp;
-          <Link href="https://https://nextjs.org/">NextJS</Link> & <Link href="https://reactjs.org/">React</Link>
+          <Link href="https://https://nextjs.org/">Next.js</Link> & <Link href="https://reactjs.org/">React</Link>
         </div>
       </div>
     </footer>
