@@ -28,8 +28,8 @@ export interface ResourceError {
 }
 
 export interface UploadResponse {
-  "@odata.context": string
-  "@microsoft.graph.downloadUrl": string
+  '@odata.context': string
+  '@microsoft.graph.downloadUrl': string
   createdDateTime: string
   cTag: string
   eTag: string

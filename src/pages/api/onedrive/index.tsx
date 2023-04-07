@@ -5,7 +5,7 @@ import { getAuthTokenWithCode, getAuthTokenWithRefreshToken } from 'src/utils/on
 
 const handler: Handler = async (req, res) => {
   if (req.method !== 'POST') {
-    res.status(405).json(generatorRespError(`method ${req.method} not supported`));
+    res.status(405).json(generatorRespError(`method ${req.method ?? ''} not supported`));
     return;
   }
   const { code, refresh_token } = req.query as { [key: string]: string };

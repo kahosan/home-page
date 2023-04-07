@@ -7,9 +7,8 @@ import { addServicesData, deleteServicesData, editServiceData, updateServiceData
 const addHandler: Handler = async (req, res) => {
   const data = JSON.parse(req.body) as Service;
 
-  if (!data) {
+  if (!data)
     res.status(400).json(generatorRespError('数据不能为空'));
-  }
 
   try {
     await addServicesData(data);
@@ -23,9 +22,8 @@ const addHandler: Handler = async (req, res) => {
 const deleteHandler: Handler = async (req, res) => {
   const data = req.body;
 
-  if (!data) {
+  if (!data)
     res.status(400).json(generatorRespError('删除的目标卡片名为空'));
-  }
 
   try {
     await deleteServicesData(data);
@@ -39,9 +37,8 @@ const deleteHandler: Handler = async (req, res) => {
 const editHandler: Handler = async (req, res) => {
   const data = JSON.parse(req.body) as Service & { oldName: string };
 
-  if (!data) {
+  if (!data)
     res.status(400).json(generatorRespError('数据不能为空'));
-  }
 
   try {
     await editServiceData(data);
@@ -55,9 +52,8 @@ const editHandler: Handler = async (req, res) => {
 const updateHandler: Handler = async (req, res) => {
   const data = JSON.parse(req.body) as Service[];
 
-  if (!data) {
+  if (!data)
     res.status(400).json(generatorRespError('数据不能为空'));
-  }
 
   try {
     await updateServiceData(data);
@@ -70,21 +66,27 @@ const updateHandler: Handler = async (req, res) => {
 
 const handler: Handler = (req, res) => {
   if (req.method !== 'POST') {
-    res.status(405).json(generatorRespError(`请求方法 ${req.method} 不支持`));
+    res.status(405).json(generatorRespError(`请求方法 ${req.method ?? ''} 不支持`));
   } else {
     const action = req.query.action as Action;
 
-    if (action === 'add') {
-      addHandler(req, res);
-    } else if (action === 'delete') {
-      deleteHandler(req, res);
-    } else if (action === 'edit') {
-      editHandler(req, res);
-    } else if (action === 'update') {
-      updateHandler(req, res);
-    } else {
-      res.status(400).json(generatorRespError(`不支持 ${action}`));
+    switch (action) {
+      case 'add':
+        addHandler(req, res);
+        break;
+      case 'delete':
+        deleteHandler(req, res);
+        break;
+      case 'edit':
+        editHandler(req, res);
+        break;
+      case 'update':
+        updateHandler(req, res);
+        break;
+      default:
+        res.status(400).json(generatorRespError('未知操作'));
     }
+
   }
 };
 

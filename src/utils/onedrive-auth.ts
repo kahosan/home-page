@@ -26,9 +26,8 @@ export const getAuthTokenWithCode = async (code: string) => {
 
   const data = await res.json();
 
-  if (!res.ok) {
+  if (!res.ok)
     throw data;
-  }
 
   return data;
 };
@@ -45,9 +44,8 @@ export const getAuthTokenWithRefreshToken = async (refreshToken: string) => {
 
   const data = await res.json();
 
-  if (!res.ok) {
+  if (!res.ok)
     throw data;
-  }
 
   return data;
 };

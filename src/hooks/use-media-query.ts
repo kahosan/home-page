@@ -14,11 +14,10 @@ const querySubscribe = (query: string, setState: QueryStateSetter) => {
       dispatchers.forEach(d => d(mql.matches));
     };
 
-    if (mql.addEventListener) {
+    if (mql.addEventListener)
       mql.addEventListener('change', listener, { passive: true });
-    } else {
+    else
       mql.addListener(listener);
-    }
 
     entry = {
       mql,
@@ -44,9 +43,9 @@ const queryUnsubscribe = (query: string, setState: QueryStateSetter): void => {
     if (!dispatchers.size) {
       queriesMap.delete(query);
 
-      if (mql.removeEventListener) {
+      if (mql.removeEventListener)
         mql.removeEventListener('change', listener);
-      } else mql.removeListener(listener);
+      else mql.removeListener(listener);
     }
   }
 };

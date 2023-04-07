@@ -45,9 +45,8 @@ export const useEditServices = () => {
       const res = await fetch('/api/services/add', { method: 'POST', body: JSON.stringify(service) });
       const data = await res.json();
 
-      if (!res.ok) {
+      if (!res.ok)
         throw new Error(data.msg);
-      }
 
       closeModal();
       // refetch data
@@ -67,9 +66,8 @@ export const useEditServices = () => {
       const res = await fetch('/api/services/delete', { method: 'POST', body: targetName });
       const data = await res.json();
 
-      if (!res.ok) {
+      if (!res.ok)
         throw new Error(data.msg);
-      }
 
       // refetch data
       update();
@@ -99,9 +97,8 @@ export const useEditServices = () => {
       const res = await fetch('/api/services/edit', { method: 'POST', body: JSON.stringify(service) });
       const data = await res.json();
 
-      if (!res.ok) {
+      if (!res.ok)
         throw new Error(data.msg);
-      }
 
       closeModal();
       // refetch data
@@ -121,9 +118,8 @@ export const useEditServices = () => {
       const res = await fetch('/api/services/update', { method: 'POST', body: JSON.stringify(services) });
       const data = await res.json();
 
-      if (!res.ok) {
+      if (!res.ok)
         throw new Error(data.msg);
-      }
 
       // refetch data
       update();

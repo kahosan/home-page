@@ -19,9 +19,8 @@ export const useOnedrive = () => {
     try {
       const res = await fetch(`/api/onedrive?${query}`, { method: 'POST' });
       const data = await res.json() as RequestTokenResponse;
-      if (!res.ok) {
+      if (!res.ok)
         throw data;
-      }
 
       // 将 token 数据保存在本地
       verifyData.accessToken = {
@@ -43,13 +42,11 @@ export const useOnedrive = () => {
 
   const getToken = async () => {
     // TODO error handler
-    if (clientId === undefined || clientSecret === undefined) {
+    if (clientId === undefined || clientSecret === undefined)
       return;
-    }
 
-    if (verifyData.accessToken.expires > new Date().getTime()) {
+    if (verifyData.accessToken.expires > new Date().getTime())
       return verifyData.accessToken.token;
-    }
 
     // 如果存在 refresh token 使用它来刷新 token
     if (verifyData.refreshToken) {

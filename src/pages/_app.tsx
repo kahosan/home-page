@@ -35,11 +35,11 @@ export default function App({ Component, pageProps }: AppProps) {
       const storedTheme = localStorage.getItem('theme') as 'dark' | 'light';
       const systemTheme = isSystemThemeDark ? 'dark' : 'light';
 
-      if (storedTheme) {
+      if (storedTheme)
         setTheme(storedTheme);
-      } else {
+      else
         setTheme(systemTheme);
-      }
+
     }
   }, [isSystemThemeDark, setTheme]);
 
