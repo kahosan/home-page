@@ -1,3 +1,4 @@
+import { getYear } from 'date-fns';
 import Link from '../link';
 
 export default function Footer() {
@@ -11,7 +12,7 @@ export default function Footer() {
         <div className="text-right dark:op-60">
           <div className="custom-bg" />
           <p className="mr-4px mb-1">由<Link href="https://github.com/kahosan/home-page">Home-Page</Link>强力驱动</p>
-          <span className="op-100">©&nbsp;{new Date().getFullYear()} </span>
+          <span className="op-100">©&nbsp;{getYear(new Date())} </span>
           PowerBy&nbsp;
           <Link href="https://https://nextjs.org/">NextJS</Link> & <Link href="https://reactjs.org/">React</Link>
         </div>

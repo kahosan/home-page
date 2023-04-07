@@ -11,6 +11,7 @@
   "dependencies": {
     "@geist-ui/core": "2.3.8",
     "clsx": "1.2.1",
+    "date-fns": "^2.29.3",
     "jotai": "2.0.0",
     "next": "latest",
     "react": "18.2.0",

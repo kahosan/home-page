@@ -8,6 +8,8 @@ import ServiceCard from '../service-card';
 
 import { useIsomorphicLayoutEffect } from 'src/hooks/use-isomorphic-layout-effect';
 import { useServices } from 'src/hooks/use-services';
+
+import { getYear, getMonth, getDate, getDay } from 'date-fns';
 import { isBrowser } from 'src/lib/utils';
 
 function DateTag() {
@@ -29,7 +31,7 @@ function DateTag() {
       } as const;
       const date = new Date();
 
-      setDateText(`${date.getFullYear()} 年 ${date.getMonth() + 1} 月 ${date.getDate()} 日 ${day[date.getDay() as keyof typeof day]}`);
+      setDateText(`${getYear(date)} 年 ${getMonth(date) + 1} 月 ${getDate(date)} 日 ${day[getDay(date)]}`);
     }
   }, [setDateText]);
 
