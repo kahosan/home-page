@@ -1,6 +1,6 @@
 import { useToasts } from '@geist-ui/core';
 
-import { useOnedriveLS } from './use-onedrive-ls';
+import { calcAccessTokenExpires, useOnedriveData } from './use-onedrive-data';
 import { useEditServices } from './use-edit-services';
 import type { Service } from 'src/types/services';
 
@@ -12,7 +12,7 @@ import type { RequestTokenError, RequestTokenResponse, ResourceError, UploadResp
 export const useOnedrive = () => {
   const { setToast } = useToasts();
 
-  const verifyData = useOnedriveLS();
+  const [onedriveData, setOnedriveData] = useOnedriveData();
   const { handleUpdateServices } = useEditServices();
 
   const requestTokenHandler = async (query: string) => {
@@ -23,12 +23,15 @@ export const useOnedrive = () => {
         throw data;
 
       // 将 token 数据保存在本地
-      verifyData.accessToken = {
-        token: data.access_token,
-        expires: verifyData.calcAccessTokenExpires(data.expires_in)
-      };
+      setOnedriveData({
+        ...onedriveData,
+        accessToken: {
+          token: data.access_token,
+          expires: calcAccessTokenExpires(data.expires_in)
+        },
+        refreshToken: data.refresh_token
+      });
 
-      verifyData.refreshToken = data.refresh_token;
     } catch (e) {
       setToast({
         text: `获取 onedrive token 失败，请重新获取 Code ${(e as RequestTokenError).error_description}`,
@@ -36,7 +39,10 @@ export const useOnedrive = () => {
       });
 
       console.error(e);
-      verifyData.removeAuthCode();
+      setOnedriveData({
+        ...onedriveData,
+        authCode: ''
+      });
     }
   };
 
@@ -45,23 +51,23 @@ export const useOnedrive = () => {
     if (clientId === undefined || clientSecret === undefined)
       return;
 
-    if (verifyData.accessToken.expires > new Date().getTime())
-      return verifyData.accessToken.token;
+    if (onedriveData.accessToken.expires > new Date().getTime())
+      return onedriveData.accessToken.token;
 
     // 如果存在 refresh token 使用它来刷新 token
-    if (verifyData.refreshToken) {
-      await requestTokenHandler(`refresh_token=${verifyData.refreshToken}`);
-      return verifyData.accessToken.token;
+    if (onedriveData.refreshToken) {
+      await requestTokenHandler(`refresh_token=${onedriveData.refreshToken}`);
+      return onedriveData.accessToken.token;
     }
 
-    if (verifyData.authCode === '') {
+    if (onedriveData.authCode === '') {
       getAuthCode();
       return;
     }
 
     // 使用 code 获取令牌
-    await requestTokenHandler(`code=${verifyData.authCode}`);
-    return verifyData.accessToken.token;
+    await requestTokenHandler(`code=${onedriveData.authCode}`);
+    return onedriveData.accessToken.token;
   };
 
   const handleUpload = async (services: Service[] | undefined) => {

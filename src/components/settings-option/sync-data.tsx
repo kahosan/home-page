@@ -1,12 +1,11 @@
 import { Button, Input, Note, Tabs, Text, useToasts } from '@geist-ui/core';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { atom, useAtom } from 'jotai';
 
 import { useOnedrive } from 'src/hooks/use-onedrive';
+import { useOnedriveData } from 'src/hooks/use-onedrive-data';
 import { useServices } from 'src/hooks/use-services';
-import { useOnedriveLS } from 'src/hooks/use-onedrive-ls';
-import { isBrowser } from 'src/lib/utils';
 
 export type DataSource = 'onedrive' | 'googledrive';
 export const dataSourceAtom = atom<DataSource>('onedrive');
@@ -14,7 +13,7 @@ export const dataSourceAtom = atom<DataSource>('onedrive');
 export default function SyncData() {
   const { setToast } = useToasts();
   const { servicesData } = useServices();
-  const verifyData = useOnedriveLS();
+  const [onedriveData, setOnedriveData] = useOnedriveData();
 
   const [dataSource, setDataSource] = useAtom(dataSourceAtom);
   const codeRef = useRef<HTMLInputElement>(null);
@@ -25,7 +24,7 @@ export default function SyncData() {
   const handleSetCode = () => {
     if (codeRef.current?.value) {
       const code = codeRef.current.value.replace(/.*\?code=/g, '').trim();
-      verifyData.authCode = code;
+      setOnedriveData({ ...onedriveData, authCode: code });
 
       setToast({ text: 'code 设置成功，请重新点击想操作的按钮', delay: 3000 });
       return;
@@ -33,13 +32,8 @@ export default function SyncData() {
     setToast({ text: '请填写 code', delay: 3000 });
   };
 
-  useEffect(() => {
-    if (isBrowser) {
-      const text = verifyData.authCode;
-      setCodeText(text);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- 服务端不存在 localStorage
-  }, []);
+  if (onedriveData.authCode && codeText !== onedriveData.authCode)
+    setCodeText(onedriveData.authCode);
 
   return (
     <div className="md:flex justify-between items-center mb-4">
