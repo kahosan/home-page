@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "dev": "npm run dev:css & npm run dev:next",
     "dev:css": "unocss 'src/**/*.tsx' --out-file=src/styles/uno.css --watch",
     "dev:next": "next dev",
     "css": "unocss 'src/**/*.tsx' --out-file=src/styles/uno.css",
