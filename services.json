@@ -25,7 +25,7 @@
   },
   {
     "name": "bgmi",
-    "description": "动画片自动下载机 功能强大",
+    "description": "动画片自动下载机",
     "icon": "data-player",
     "path": "https://github.com/BGmi/BGmi"
   },
@@ -37,7 +37,7 @@
   },
   {
     "name": "syncthing",
-    "description": "功能强大的去中心化备份同步工具",
+    "description": "去中心化备份同步工具",
     "icon": "data-backup",
     "path": "https://syncthing.net"
   },
