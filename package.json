@@ -12,12 +12,12 @@
   "dependencies": {
     "@geist-ui/core": "2.3.8",
     "clsx": "1.2.1",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
     "jotai": "2.0.0",
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "swr": "^2.1.2"
+    "swr": "^2.1.5"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.16",
