@@ -11,9 +11,9 @@ export default function Hitokoto() {
     data?.hitokoto
       ? (
         <>
-          {data?.hitokoto}
+          {data.hitokoto}
           <p className="text-0.75rem my-1 op-60">
-            来源: {data?.from}
+            来源: {data.from}
           </p>
         </>
       )

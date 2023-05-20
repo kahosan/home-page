@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     if (isBrowser && isSystemThemeDark !== undefined) {
-      const storedTheme = localStorage.getItem('theme') as 'dark' | 'light';
+      const storedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
       const systemTheme = isSystemThemeDark ? 'dark' : 'light';
 
       if (storedTheme)

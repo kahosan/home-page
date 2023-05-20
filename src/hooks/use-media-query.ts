@@ -14,6 +14,7 @@ const querySubscribe = (query: string, setState: QueryStateSetter) => {
       dispatchers.forEach(d => d(mql.matches));
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- false positive
     if (mql.addEventListener)
       mql.addEventListener('change', listener, { passive: true });
     else
@@ -43,6 +44,7 @@ const queryUnsubscribe = (query: string, setState: QueryStateSetter): void => {
     if (!dispatchers.size) {
       queriesMap.delete(query);
 
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- false positive
       if (mql.removeEventListener)
         mql.removeEventListener('change', listener);
       else mql.removeListener(listener);

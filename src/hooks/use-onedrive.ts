@@ -48,7 +48,7 @@ export const useOnedrive = () => {
 
   const getToken = async () => {
     // TODO error handler
-    if (clientId === undefined || clientSecret === undefined)
+    if (!clientId || !clientSecret)
       return;
 
     if (onedriveData.accessToken.expires > new Date().getTime())

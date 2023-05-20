@@ -12,6 +12,21 @@
         "kaho/react",
         "kaho/ts"
       ],
+      "rules": {
+        "@typescript-eslint/member-delimiter-style": [
+          "error",
+          {
+            "multiline": {
+              "delimiter": "none",
+              "requireLast": false
+            },
+            "singleline": {
+              "delimiter": "semi",
+              "requireLast": false
+            }
+          }
+        ]
+      },
       "parserOptions": {
         "project": "./tsconfig.json"
       }

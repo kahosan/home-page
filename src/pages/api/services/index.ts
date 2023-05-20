@@ -8,7 +8,6 @@ const handler: Handler = async (req, res) => {
     res.status(405).json(generatorRespError(`method ${req.method ?? ''} not supported`));
   else
     res.status(200).json(await getServicesData());
-
 };
 
 export default handler;
