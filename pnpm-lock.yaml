@@ -31,8 +31,8 @@ devDependencies:
     specifier: ^1.1.16
     version: 1.1.16
   '@types/node':
-    specifier: 18.0.3
-    version: 18.0.3
+    specifier: 18.16.13
+    version: 18.16.13
   '@types/react':
     specifier: 18.0.15
     version: 18.0.15
@@ -672,8 +672,8 @@ packages:
       '@types/unist': 2.0.6
     dev: true
 
-  /@types/node@18.0.3:
-    resolution: {integrity: sha512-HzNRZtp4eepNitP+BD6k2L6DROIDG4Q0fm4x+dwfsr6LGmROENnok75VGw40628xf+iR24WeMFcHuuBDUAzzsQ==}
+  /@types/node@18.16.13:
+    resolution: {integrity: sha512-uZRomboV1vBL61EBXneL4j9/hEn+1Yqa4LQdpGrKmXFyJmVfWc9JV9+yb2AlnOnuaDnb2PDO3hC6/LKmzJxP1A==}
     dev: true
 
   /@types/normalize-package-data@2.4.1:
@@ -996,7 +996,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.2.12
       magic-string: 0.29.0
-      vite: 4.3.8(@types/node@18.0.3)
+      vite: 4.3.8(@types/node@18.16.13)
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -3946,7 +3946,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite@4.3.8(@types/node@18.0.3):
+  /vite@4.3.8(@types/node@18.16.13):
     resolution: {integrity: sha512-uYB8PwN7hbMrf4j1xzGDk/lqjsZvCDbt/JC5dyfxc19Pg8kRm14LinK/uq+HSLNswZEoKmweGdtpbnxRtrAXiQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -3971,7 +3971,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.0.3
+      '@types/node': 18.16.13
       esbuild: 0.17.19
       postcss: 8.4.23
       rollup: 3.22.0
