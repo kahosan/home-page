@@ -18,7 +18,8 @@
     "next": "latest",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "swr": "^2.1.5"
+    "swr": "^2.1.5",
+    "systeminformation": "^5.17.12"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.16",
