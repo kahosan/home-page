@@ -1,0 +1,15 @@
+services:
+  home-page:
+    container_name: home-page
+    image: kahosan/home-page
+    user: 1000:1000
+    environment:
+      - TZ=Asia/Shanghai
+      - NEXT_PUBLIC_HOME_TWITTER=https://twitter.com/kaho_suyf
+      - NEXT_PUBLIC_HOME_BLOG=https://blog.kahosan.top/
+      - NEXT_PUBLIC_HOME_HEADER_TITLE=Data Center
+      - NEXT_PUBLIC_HOME_TITLE=NAS 数据中心
+    volumes:
+      - ./services.json:/app/services.json
+    ports:
+      - 3000:3000

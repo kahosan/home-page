@@ -1,0 +1,13 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+.vscode
+dist
+
+.env.production
+.env.development
+.env.example

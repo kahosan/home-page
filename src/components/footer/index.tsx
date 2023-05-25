@@ -1,9 +1,14 @@
 import { getYear } from 'date-fns';
+import { fetcher } from 'src/lib/fetcher';
+import useSWR from 'swr';
 
 import Link from '../link';
 import SystemInfo from './system-info';
 
+import type { Env } from 'src/types/env';
+
 export default function Footer() {
+  const { data } = useSWR<Env>('/api/env', fetcher);
   return (
     <footer className=" max-w-5xl mx-auto p-3 op-60 mt-8 absolute bottom-2 right-0 left-0">
       <div className="font-300 text-13px flex justify-between items-end w-full">
@@ -12,8 +17,8 @@ export default function Footer() {
             <SystemInfo />
           </div>
           <p className="mt-2">
-            <Link href={process.env.NEXT_PUBLIC_HOME_BLOG || ''}>Blog</Link>
-            <Link href={process.env.NEXT_PUBLIC_HOME_TWITTER || ''}>Twitter</Link>
+            <Link href={data?.blog}>Blog</Link>
+            <Link href={data?.twitter}>Twitter</Link>
           </p>
         </div>
         <div className="text-right dark:op-60">

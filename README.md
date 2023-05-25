@@ -55,9 +55,11 @@ pnpm run start # -p 8765 可以这样选择端口
 
 可以使用 nginx 代理，也可以直接输入部署服务器的 IP 和端口号直接访问
 
-### 使用 Vercel
+### 使用 Docker
 
-fork 本项目，然后导入到 vercel 中，环境变量需要根据 .env 文件中的需要，手动输入到 vercel 的项目设置里
+3202 年了，用 [`docker-compose.yaml`](/docker-compose.yaml) 吧
+
+**注意在使用前创建好 `services.json` 文件**
 
 ### 修改自定义背景
 
@@ -71,7 +73,9 @@ fork 本项目，然后导入到 vercel 中，环境变量需要根据 .env 文�
 
 点击右上角的铅笔按钮。
 
-如果部署在 vercel，存储的数据是在 `/tmp` 目录中，可能会丢失数据，本地部署则为修改 `services.json` 文件。
+### 同步数据
+
+点右上角的齿轮，暂时只支持 OneDrive
 
 ## 如果你想为本项目做贡献
 
@@ -80,7 +84,6 @@ fork 本项目，然后导入到 vercel 中，环境变量需要根据 .env 文�
 ## TODO
 
 - [x] 在线编辑
-- [ ] 导入导出功能
 - [ ] 添加一些好玩的东西，暂时还没想法，如果有什么好的想法欢迎提 issue
 
 ## License

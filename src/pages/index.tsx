@@ -5,9 +5,11 @@ import { SWRConfig } from 'swr';
 import Header from '../components/header';
 import DataCenter from '../components/data-center';
 
+import { BLOG, HEADER_TITLE, TITLE, TWITTER } from 'src/lib/constant';
 import type { Service } from 'src/types/services';
+import type { Env } from 'src/types/env';
 
-export default function HomePage({ fallback }: { fallback: { '/api/services': Service[] } }) {
+export default function HomePage({ fallback }: Record<string, any>) {
   return (
     <SWRConfig value={{ fallback }}>
       <Head>
@@ -21,7 +23,13 @@ export default function HomePage({ fallback }: { fallback: { '/api/services': Se
 }
 
 export async function getServerSideProps() {
-  let servicesData = [];
+  let servicesData: Service[] = [];
+  const envData: Env = {
+    title: TITLE,
+    headerTitle: HEADER_TITLE,
+    blog: BLOG,
+    twitter: TWITTER
+  };
 
   if (process.env.API_URL !== '' && process.env.API_URL !== undefined) {
     const res = await fetch(`${process.env.API_URL}/api/services`);
@@ -31,7 +39,8 @@ export async function getServerSideProps() {
   return {
     props: {
       fallback: {
-        '/api/services': servicesData
+        '/api/services': servicesData,
+        '/api/env': envData
       }
     }
   };
