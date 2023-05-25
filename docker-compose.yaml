@@ -2,6 +2,7 @@ services:
   home-page:
     container_name: home-page
     image: kahosan/home-page
+    user: 1000:1000
     environment:
       - TZ=Asia/Shanghai
       - NEXT_PUBLIC_HOME_TWITTER=https://twitter.com/kaho_suyf
