@@ -6,7 +6,11 @@ import ServiceCard from '../service-card';
 
 import { useServices } from 'src/hooks/use-services';
 
+import useSWR from 'swr';
+import { fetcher } from 'src/lib/fetcher';
 import { getYear, getMonth, getDate, getDay } from 'date-fns';
+
+import type { Env } from 'src/types/env';
 
 function DateTag() {
 
@@ -30,12 +34,13 @@ function DateTag() {
 
 export default function DataCenter() {
   const { servicesData } = useServices();
-
+  // docker 动态加载 env
+  const { data } = useSWR<Env>('/api/env', fetcher);
   return (
     <div className="min-h-100vh pt-70px px-4 max-w-5xl mx-auto relative pb-70">
       <div className="flex justify-between items-center min-h-14">
         <div>
-          <h3 className="mb-0 font-bold">{process.env.NEXT_PUBLIC_HOME_TITLE || 'NAS 数据中心'}</h3>
+          <h3 className="mb-0 font-bold">{data?.title}</h3>
           <DateTag />
         </div>
         <div className="text-right text-0.9rem lt-md:w-50% mt-1">

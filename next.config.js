@@ -5,8 +5,9 @@ const nextConfig = withForgetti({
   preset: 'react',
 })({
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
-  distDir: 'dist',
+  output: 'standalone',
   experimental: {
+    outputStandalone: true,
   },
 });
 
