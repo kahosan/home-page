@@ -1,72 +1,89 @@
 import { Button, Input, Note, Tabs, Text, useToasts } from '@geist-ui/core';
-import { useRef, useState } from 'react';
-
-import { atom, useAtom } from 'jotai';
+import { useState } from 'react';
 
 import { useOnedrive } from 'src/hooks/use-onedrive';
 import { useOnedriveData } from 'src/hooks/use-onedrive-data';
 import { useServices } from 'src/hooks/use-services';
+import { getAuthCode } from 'src/utils/onedrive-auth';
 
 export type DataSource = 'onedrive' | 'googledrive';
-export const dataSourceAtom = atom<DataSource>('onedrive');
-
 export default function SyncData() {
   const { setToast } = useToasts();
   const { servicesData } = useServices();
   const [onedriveData, setOnedriveData] = useOnedriveData();
 
-  const [dataSource, setDataSource] = useAtom(dataSourceAtom);
-  const codeRef = useRef<HTMLInputElement>(null);
   const [codeText, setCodeText] = useState('');
 
   const { handleUpload, handleSync } = useOnedrive();
 
   const handleSetCode = () => {
-    if (codeRef.current?.value) {
-      const code = codeRef.current.value.replace(/.*\?code=/g, '').trim();
-      setOnedriveData({ ...onedriveData, authCode: code });
-
-      setToast({ text: 'code 设置成功，请重新点击想操作的按钮', delay: 3000 });
+    if (!codeText) {
+      setToast({ text: '请输入 Code', type: 'error', delay: 3000 });
       return;
     }
-    setToast({ text: '请填写 code', delay: 3000 });
+    const code = codeText.replace(/.*\?code=/g, '').trim();
+    setOnedriveData({ ...onedriveData, authCode: code });
+    setToast({ text: 'code 设置成功，请点击想操作的按钮', delay: 3000 });
   };
-
-  if (onedriveData.authCode && codeText !== onedriveData.authCode)
-    setCodeText(onedriveData.authCode);
 
   return (
     <div className="md:flex justify-between items-center mb-4">
-      <Tabs leftSpace="" initialValue={dataSource} onChange={value => setDataSource(value as DataSource)}>
+      <Tabs leftSpace="" initialValue="onedrive">
         <Tabs.Item label="OneDrive" value="onedrive">
           <div className="mb-4">
             <Input
-              className="md:!w-[calc(15*16px)]"
+              w="100%"
               placeholder="输入 Code..."
-              ref={codeRef}
               onChange={e => setCodeText(e.target.value)}
-              value={codeText}
+              onKeyUp={e => e.key === 'Enter' && handleSetCode()}
+              defaultValue={onedriveData.authCode}
             />
-            <Button type="secondary-light" className="!ml-3" onClick={handleSetCode} auto scale={2.5 / 3}>设置值</Button>
           </div>
-          <div className="mb-4">
-            <Button type="secondary-light" onClick={handleSync} className="!mr-3 lt-md:!mb-4" icon={<div className="i-carbon-cloud-download text-5" />} auto scale={0.77}>
-              从 {dataSource === 'onedrive' ? 'OneDrive' : 'GoogleDrive'} 同步
+          <div className="mb-4 grid justify-center gap-4 grid-cols-[repeat(auto-fit,_10rem)]">
+            <Button
+              type="secondary-light"
+              onClick={handleSetCode}
+              icon={<div className="i-carbon-brush-freehand text-5" />}
+              auto
+              scale={0.7}
+            >
+              设置 Code
             </Button>
-            <Button type="secondary-light" onClick={() => handleUpload(servicesData)} icon={<div className="i-carbon-cloud-upload text-5" />} auto scale={0.77}>
-              更新至 {dataSource === 'onedrive' ? 'OneDrive' : 'GoogleDrive'}
+            <Button
+              type="secondary-light"
+              onClick={getAuthCode}
+              icon={<div className="i-carbon-folder-open text-5" />}
+              auto
+              scale={0.7}
+            >
+              获取 Code
+            </Button>
+            <Button
+              type="secondary-light"
+              onClick={handleSync}
+              icon={<div className="i-carbon-cloud-download text-5" />}
+              auto
+              scale={0.7}
+            >
+              从 OneDrive 同步
+            </Button>
+            <Button
+              type="secondary-light"
+              onClick={() => handleUpload(servicesData)}
+              icon={<div className="i-carbon-cloud-upload text-5" />}
+              auto
+              scale={0.7}
+            >
+              更新至 OneDrive
             </Button>
           </div>
           <Note type="warning">
             <Text>
               获取 Token 仅用于更新、同步 Home-Page 的数据。并且 Token 等数据都只会存在本地浏览器中
               <br />
-              点击任意一个按钮，授权 OneDrive 权限。然后将跳转后的地址栏链接复制到输入框并点击「设置值」
+              点击「获取 Code」按钮，授权 OneDrive 权限。然后将跳转后的地址栏链接复制到输入框并点击「设置 Code」
             </Text>
           </Note>
-        </Tabs.Item>
-        <Tabs.Item disabled label="Google Drive" value="googledrive">
-          尚未支持
         </Tabs.Item>
       </Tabs>
     </div>

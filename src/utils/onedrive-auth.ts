@@ -1,17 +1,17 @@
+import { CLIENT_ID, CLIENT_SECRET } from 'src/lib/constant';
+
 export const authApi = 'https://login.microsoftonline.com/common/oauth2/v2.0';
-export const clientId = process.env.NEXT_PUBLIC_ONEDRIVE_CLIENT_ID || '';
-export const clientSecret = process.env.NEXT_PUBLIC_ONEDRIVE_CLIENT_SECRET || '';
 export const scope = 'Files.ReadWrite offline_access';
 export const redirectUri = 'http://localhost';
 
 const params = new URLSearchParams({
-  client_id: clientId,
+  client_id: CLIENT_ID,
   redirect_uri: redirectUri,
-  client_secret: clientSecret
+  client_secret: CLIENT_SECRET
 });
 
 export const getAuthCode = () => {
-  window.open(`${authApi}/authorize?client_id=${clientId}&scope=${encodeURIComponent(scope)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}`, '_blank');
+  window.open(`${authApi}/authorize?client_id=${CLIENT_ID}&scope=${encodeURIComponent(scope)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}`, '_blank');
 };
 
 export const getAuthTokenWithCode = async (code: string) => {

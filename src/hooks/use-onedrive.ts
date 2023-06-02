@@ -4,10 +4,10 @@ import { calcAccessTokenExpires, useOnedriveData } from './use-onedrive-data';
 import { useEditServices } from './use-edit-services';
 import type { Service } from 'src/types/services';
 
-import { clientId, clientSecret, getAuthCode } from 'src/utils/onedrive-auth';
 import { HTTPError, fetcherWithAuthorization } from 'src/lib/fetcher';
+import { CLIENT_ID, CLIENT_SECRET } from 'src/lib/constant';
 
-import type { RequestTokenError, RequestTokenResponse, ResourceError, UploadResponse } from 'src/types/onedrive';
+import type { RequestTokenResponse, ResourceError, UploadResponse } from 'src/types/onedrive';
 
 export const useOnedrive = () => {
   const { setToast } = useToasts();
@@ -34,22 +34,20 @@ export const useOnedrive = () => {
 
     } catch (e) {
       setToast({
-        text: `获取 onedrive token 失败，请重新获取 Code ${(e as RequestTokenError).error_description}`,
+        text: '获取 onedrive token 失败，请重新获取 code',
+        type: 'error',
         delay: 4000
       });
 
       console.error(e);
-      setOnedriveData({
-        ...onedriveData,
-        authCode: ''
-      });
     }
   };
 
   const getToken = async () => {
-    // TODO error handler
-    if (!clientId || !clientSecret)
+    if (!CLIENT_ID || !CLIENT_SECRET) {
+      setToast({ text: 'client id 和 client secret 不存在', type: 'error', delay: 4000 });
       return;
+    }
 
     if (onedriveData.accessToken.expires > new Date().getTime())
       return onedriveData.accessToken.token;
@@ -60,8 +58,8 @@ export const useOnedrive = () => {
       return onedriveData.accessToken.token;
     }
 
-    if (onedriveData.authCode === '') {
-      getAuthCode();
+    if (!onedriveData.authCode) {
+      setToast({ text: 'auth code 不存在', type: 'error', delay: 4000 });
       return;
     }
 
@@ -73,8 +71,11 @@ export const useOnedrive = () => {
   const handleUpload = async (services: Service[] | undefined) => {
     const token = await getToken();
 
-    if (services === undefined || services.length === 0 || !token) {
-      setToast({ text: '上传数据出错', delay: 4000 });
+    if (!token)
+      return;
+
+    if (services === undefined || services.length === 0) {
+      setToast({ text: 'services 数据不存在', type: 'error', delay: 4000 });
       return;
     }
 
@@ -98,10 +99,8 @@ export const useOnedrive = () => {
   const handleSync = async () => {
     const token = await getToken();
 
-    if (!token) {
-      setToast({ text: 'token 获取失败', delay: 4000 });
+    if (!token)
       return;
-    }
 
     try {
       const data = await fetcherWithAuthorization<Service[]>([encodeURIComponent('root:/services.json:/content'), token], { method: 'GET' });
