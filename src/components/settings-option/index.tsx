@@ -23,7 +23,7 @@ function OptionWrapper({ title, initialVisible, children }: OptionWrapperProps) 
       >
         {children}
       </Collapse>
-      <div className="border-b-style-solid border-[#3f3f3f]" />
+      <div className="border-b-style-solid dark:border-[#3f3f3f] border-[#bfbfbf]" />
     </>
   );
 }
