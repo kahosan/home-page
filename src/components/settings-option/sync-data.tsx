@@ -27,8 +27,8 @@ export default function SyncData() {
   };
 
   return (
-    <div className="md:flex justify-between items-center mb-4">
-      <Tabs leftSpace="" initialValue="onedrive">
+    <div className="md:flex md:items-center">
+      <Tabs leftSpace="" initialValue="onedrive" className="flex-1">
         <Tabs.Item label="OneDrive" value="onedrive">
           <div className="mb-4">
             <Input
@@ -39,7 +39,7 @@ export default function SyncData() {
               defaultValue={onedriveData.authCode}
             />
           </div>
-          <div className="mb-4 grid justify-center gap-4 grid-cols-[repeat(auto-fit,_10rem)]">
+          <div className="mb-4 grid md:justify-center gap-2 md:grid-cols-[repeat(auto-fit,24%)]">
             <Button
               type="secondary-light"
               onClick={handleSetCode}

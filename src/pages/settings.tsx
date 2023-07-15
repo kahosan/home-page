@@ -6,7 +6,7 @@ import SettingsOption from 'src/components/settings-option';
 
 import ThemeToggle from 'src/components/theme-toggle';
 
-export type SettingItems = '同步数据';
+export type SettingItems = '同步数据' | '基本设置';
 
 export default function Settings() {
   return (
@@ -29,6 +29,7 @@ export default function Settings() {
       </div>
       <Divider className="!m-0 dark:op-80 !dark:bg-#1D1D1D" />
       <div className="max-w-[64rem] mx-auto px-10">
+        <SettingsOption title="基本设置" />
         <SettingsOption title="同步数据" />
       </div>
     </>
