@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useToasts } from '@geist-ui/core';
 
 import { calcAccessTokenExpires, useOnedriveData } from './use-onedrive-data';
@@ -15,7 +16,10 @@ export const useOnedrive = () => {
   const [onedriveData, setOnedriveData] = useOnedriveData();
   const { handleUpdateServices } = useEditServices();
 
-  const requestTokenHandler = async (query: string) => {
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const requestTokenHandler = async (query: string): Promise<string | undefined> => {
     try {
       const res = await fetch(`/api/onedrive?${query}`, { method: 'POST' });
       const data = await res.json() as RequestTokenResponse;
@@ -32,7 +36,17 @@ export const useOnedrive = () => {
         refreshToken: data.refresh_token
       });
 
+      return data.access_token;
     } catch (e) {
+      setOnedriveData({
+        accessToken: {
+          token: '',
+          expires: 0
+        },
+        authCode: '',
+        refreshToken: ''
+      });
+
       setToast({
         text: '获取 onedrive token 失败，请重新获取 code',
         type: 'error',
@@ -53,10 +67,8 @@ export const useOnedrive = () => {
       return onedriveData.accessToken.token;
 
     // 如果存在 refresh token 使用它来刷新 token
-    if (onedriveData.refreshToken) {
-      await requestTokenHandler(`refresh_token=${onedriveData.refreshToken}`);
-      return onedriveData.accessToken.token;
-    }
+    if (onedriveData.refreshToken)
+      return requestTokenHandler(`refresh_token=${onedriveData.refreshToken}`);
 
     if (!onedriveData.authCode) {
       setToast({ text: 'auth code 不存在', type: 'error', delay: 4000 });
@@ -64,17 +76,21 @@ export const useOnedrive = () => {
     }
 
     // 使用 code 获取令牌
-    await requestTokenHandler(`code=${onedriveData.authCode}`);
-    return onedriveData.accessToken.token;
+    return requestTokenHandler(`code=${onedriveData.authCode}`);
   };
 
   const handleUpload = async (services: Service[] | undefined) => {
+    setIsUploading(true);
     const token = await getToken();
 
-    if (!token)
+    if (!token) {
+      setIsUploading(false);
+      setToast({ text: 'token 不存在', type: 'error', delay: 4000 });
       return;
+    }
 
     if (services === undefined || services.length === 0) {
+      setIsUploading(false);
       setToast({ text: 'services 数据不存在', type: 'error', delay: 4000 });
       return;
     }
@@ -87,35 +103,45 @@ export const useOnedrive = () => {
 
     try {
       await fetcherWithAuthorization<UploadResponse>([encodeURIComponent('root:/services.json:/content'), token], requestOptions);
+      setIsUploading(false);
       setToast({ text: '更新成功' });
     } catch (e) {
+      setIsUploading(false);
       if (e instanceof HTTPError) {
         const errorInfo = e.info as ResourceError;
-        setToast({ text: `更新失败: ${errorInfo.error.message}`, delay: 4000 });
+        setToast({ text: `更新失败: ${errorInfo.error.message}`, type: 'error', delay: 4000 });
       }
     }
   };
 
   const handleSync = async () => {
+    setIsSyncing(true);
     const token = await getToken();
 
-    if (!token)
+    if (!token) {
+      setIsSyncing(false);
+      setToast({ text: 'token 不存在', type: 'error', delay: 4000 });
       return;
+    }
 
     try {
       const data = await fetcherWithAuthorization<Service[]>([encodeURIComponent('root:/services.json:/content'), token], { method: 'GET' });
       handleUpdateServices(data);
 
+      setIsSyncing(false);
       setToast({ text: '同步成功' });
     } catch (e) {
+      setIsSyncing(false);
       if (e instanceof HTTPError) {
         const errorInfo = e.info as ResourceError;
-        setToast({ text: `同步失败: ${errorInfo.error.message}`, delay: 4000 });
+        setToast({ text: `同步失败: ${errorInfo.error.message}`, type: 'error', delay: 4000 });
       }
     }
   };
 
   return {
+    isSyncing,
+    isUploading,
     handleUpload,
     handleSync
   };
