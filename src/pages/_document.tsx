@@ -14,9 +14,9 @@ const MyDocument = () => {
 
               const theme = window.localStorage.getItem('theme')
               const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : ''
-              if (theme !== 'dark' && theme !== 'light') {
-                document.documentElement.classList.add(systemTheme);
-              } else if (theme === 'dark') {
+              if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+              } else if (systemTheme === 'dark') {
                 document.documentElement.classList.add('dark');
               };
             })()
