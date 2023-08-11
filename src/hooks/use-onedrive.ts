@@ -85,7 +85,6 @@ export const useOnedrive = () => {
 
     if (!token) {
       setIsUploading(false);
-      setToast({ text: 'token 不存在', type: 'error', delay: 4000 });
       return;
     }
 
@@ -120,7 +119,6 @@ export const useOnedrive = () => {
 
     if (!token) {
       setIsSyncing(false);
-      setToast({ text: 'token 不存在', type: 'error', delay: 4000 });
       return;
     }
 
