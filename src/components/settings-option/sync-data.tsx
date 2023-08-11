@@ -14,7 +14,7 @@ export default function SyncData() {
 
   const [codeText, setCodeText] = useState('');
 
-  const { handleUpload, handleSync } = useOnedrive();
+  const { isSyncing, isUploading, handleUpload, handleSync } = useOnedrive();
 
   const handleSetCode = () => {
     if (!codeText) {
@@ -30,14 +30,14 @@ export default function SyncData() {
     <div className="md:flex md:items-center">
       <Tabs leftSpace="" initialValue="onedrive" className="flex-1" hideDivider>
         <Tabs.Item label="OneDrive" value="onedrive">
-          <div className="mb-4">
+          <div className="mb-4" key={onedriveData.authCode}>
             <Input
               w="100%"
               type="secondary"
               placeholder="输入 Code..."
               onChange={e => setCodeText(e.target.value)}
               onKeyUp={e => e.key === 'Enter' && handleSetCode()}
-              defaultValue={onedriveData.authCode}
+              initialValue={onedriveData.authCode}
             />
           </div>
           <div className="mb-4 grid md:justify-center gap-2 md:grid-cols-[repeat(auto-fit,24%)]">
@@ -65,6 +65,7 @@ export default function SyncData() {
               icon={<div className="i-carbon-cloud-download text-5" />}
               auto
               scale={0.7}
+              loading={isSyncing}
             >
               从 OneDrive 同步
             </Button>
@@ -74,6 +75,7 @@ export default function SyncData() {
               icon={<div className="i-carbon-cloud-upload text-5" />}
               auto
               scale={0.7}
+              loading={isUploading}
             >
               更新至 OneDrive
             </Button>
