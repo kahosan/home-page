@@ -1,4 +1,8 @@
 {
+  "name": "home-page",
+  "version": "0.7.8",
+  "description": "一个简洁的 NAS 导航页 & 主页",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "npm run dev:css & npm run dev:next",
