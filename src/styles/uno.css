@@ -2166,8 +2166,9 @@
 .justify-between{justify-content:space-between;}
 .gap-2{grid-gap:0.5rem;gap:0.5rem;}
 .border-b{border-bottom-width:1px;}
-.border-\[\#3f3f3f\]{--un-border-opacity:1;border-color:rgba(63,63,63,var(--un-border-opacity));}
+.border-\[\#bfbfbf\]{--un-border-opacity:1;border-color:rgba(191,191,191,var(--un-border-opacity));}
 .border-current{border-color:currentColor;}
+.dark .dark\:border-\[\#3f3f3f\]{--un-border-opacity:1;border-color:rgba(63,63,63,var(--un-border-opacity));}
 .rd-2{border-radius:0.5rem;}
 .border-none\!{border-style:none !important;}
 .border-b-style-solid{border-bottom-style:solid;}

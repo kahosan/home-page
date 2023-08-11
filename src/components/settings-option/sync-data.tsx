@@ -28,11 +28,12 @@ export default function SyncData() {
 
   return (
     <div className="md:flex md:items-center">
-      <Tabs leftSpace="" initialValue="onedrive" className="flex-1">
+      <Tabs leftSpace="" initialValue="onedrive" className="flex-1" hideDivider>
         <Tabs.Item label="OneDrive" value="onedrive">
           <div className="mb-4">
             <Input
               w="100%"
+              type="secondary"
               placeholder="输入 Code..."
               onChange={e => setCodeText(e.target.value)}
               onKeyUp={e => e.key === 'Enter' && handleSetCode()}
