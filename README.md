@@ -1,8 +1,14 @@
 <h1 align="center">Home-Page</h1>
 
-![normal](.github/image/normal.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/image/normal-dark.png">
+  <img alt="normal" src=".github/image/normal.png">
+</picture>
 
-![edit](.github/image/edit.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/image/edit-dark.png">
+  <img alt="edit" src=".github/image/edit.png">
+</picture>
 
 <p align="center">一个简洁的 NAS 主页 & 导航页</p>
 
