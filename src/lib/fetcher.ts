@@ -1,4 +1,4 @@
-export const fetcher = (url: string) => fetch(url).then(res => res.json());
+export const fetcher = <T>(url: string) => fetch(url).then(res => res.json() as Promise<T>);
 
 export const ONEDRIVE_DRIVE_API = 'https://graph.microsoft.com/v1.0/me/drive/';
 
@@ -35,5 +35,5 @@ export const fetcherWithAuthorization = async <T>([key, token]: [string, string]
     // Attach extra info to the error object.
     throw new HTTPError('An error occurred while fetching the data.', data, res.status);
   }
-  return data;
+  return data as T;
 };

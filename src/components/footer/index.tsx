@@ -1,6 +1,7 @@
-import { getYear } from 'date-fns';
 import { fetcher } from 'src/lib/fetcher';
 import useSWR from 'swr';
+
+import getYear from 'date-fns/getYear';
 
 import Link from '../link';
 import SystemInfo from './system-info';

@@ -8,7 +8,11 @@ import { useServices } from 'src/hooks/use-services';
 
 import useSWR from 'swr';
 import { fetcher } from 'src/lib/fetcher';
-import { getYear, getMonth, getDate, getDay } from 'date-fns';
+
+import getYear from 'date-fns/getYear';
+import getMonth from 'date-fns/getMonth';
+import getDate from 'date-fns/getDate';
+import getDay from 'date-fns/getDay';
 
 import type { Env } from 'src/types/env';
 
