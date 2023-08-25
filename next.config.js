@@ -6,9 +6,6 @@ const nextConfig = withForgetti({
 })({
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   output: 'standalone',
-  experimental: {
-    outputStandalone: true,
-  },
 });
 
 module.exports = nextConfig;
