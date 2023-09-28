@@ -27,6 +27,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
+.env.development
 .env.production
 .env
 .env.local
@@ -42,3 +43,6 @@ yarn-error.log*
 .turbo
 .vscode
 styles/dist.css
+
+# services
+dev_services.json
