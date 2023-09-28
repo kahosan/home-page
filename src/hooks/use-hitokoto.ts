@@ -16,7 +16,7 @@ export const useHitokoto = () => useSWR<Hitokoto>(
   fetcher,
   {
     revalidateOnFocus: false,
-    onError: (e) => {
+    onError(e) {
       console.error(e.message);
     }
   }

@@ -63,7 +63,7 @@ export const useOnedrive = () => {
       return;
     }
 
-    if (onedriveData.accessToken.expires > new Date().getTime())
+    if (onedriveData.accessToken.expires > Date.now())
       return onedriveData.accessToken.token;
 
     // 如果存在 refresh token 使用它来刷新 token

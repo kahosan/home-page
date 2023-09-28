@@ -1,7 +1,7 @@
 import { generatorRespError } from 'src/utils/handler';
 import type { Handler } from 'src/types/next-handler';
 
-const handler: Handler = async (req, res) => {
+const handler: Handler = (req, res) => {
   if (req.method !== 'GET')
     res.status(405).json(generatorRespError(`method ${req.method ?? ''} not supported`));
 

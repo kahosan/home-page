@@ -24,5 +24,5 @@ const onedriveAtom = atomWithStorage<OnedriveData>('onedrive-data', {
 export const useOnedriveData = () => useAtom(onedriveAtom);
 
 export function calcAccessTokenExpires(expires: number) {
-  return new Date().getTime() + expires * 1000;
+  return Date.now() + expires * 1000;
 }

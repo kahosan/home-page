@@ -17,7 +17,6 @@ import getDay from 'date-fns/getDay';
 import type { Env } from 'src/types/env';
 
 function DateTag() {
-
   const day = {
     0: '星期日',
     1: '星期一',

@@ -21,7 +21,7 @@ export default function SyncData() {
       setToast({ text: '请输入 Code', type: 'error', delay: 3000 });
       return;
     }
-    const code = codeText.replace(/.*\?code=/g, '').trim();
+    const code = codeText.replaceAll(/.*\?code=/g, '').trim();
     setOnedriveData({ ...onedriveData, authCode: code });
     setToast({ text: 'code 设置成功，请点击想操作的按钮', delay: 3000 });
   };

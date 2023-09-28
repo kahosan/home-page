@@ -39,7 +39,6 @@ export default function App({ Component, pageProps }: AppProps) {
         setTheme(storedTheme);
       else
         setTheme(systemTheme);
-
     }
   }, [isSystemThemeDark, setTheme]);
 
