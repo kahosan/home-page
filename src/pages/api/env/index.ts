@@ -1,7 +1,7 @@
 import { generatorRespError } from 'src/utils/handler';
-import type { Handler } from 'src/types/next-handler';
+import type { NextApiHandler } from 'next';
 
-const handler: Handler = (req, res) => {
+const handler: NextApiHandler = (req, res) => {
   if (req.method !== 'GET')
     res.status(405).json(generatorRespError(`method ${req.method ?? ''} not supported`));
 

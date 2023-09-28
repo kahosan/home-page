@@ -1,9 +1,9 @@
-import type { Handler } from 'src/types/next-handler';
+import type { NextApiHandler } from 'next';
 
 import { generatorRespError } from 'src/utils/handler';
 import { getAuthTokenWithCode, getAuthTokenWithRefreshToken } from 'src/utils/onedrive-auth';
 
-const handler: Handler = async (req, res) => {
+const handler: NextApiHandler = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json(generatorRespError(`method ${req.method ?? ''} not supported`));
     return;
