@@ -1,11 +1,11 @@
 import * as si from 'systeminformation';
 import type { NextApiHandler } from 'next';
 
-import { generatorRespError } from 'src/utils/handler';
+import { generatorRespError } from 'src/lib/utils';
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method !== 'GET') {
-    res.status(405).json(generatorRespError(`method ${req.method ?? ''} not supported`));
+    res.status(405).json(generatorRespError(`请求方法 ${req.method ?? ''} 不支持`));
     return;
   }
 
@@ -17,7 +17,7 @@ const handler: NextApiHandler = async (req, res) => {
       res.status(200).json({ free: `${((await si.mem()).free / (1024 ** 3)).toFixed(2)} GB` });
       break;
     default:
-      res.status(400).json(generatorRespError('unknown type'));
+      res.status(400).json(generatorRespError('未知查询类型'));
   }
 };
 

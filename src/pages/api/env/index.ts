@@ -1,9 +1,9 @@
-import { generatorRespError } from 'src/utils/handler';
+import { generatorRespError } from 'src/lib/utils';
 import type { NextApiHandler } from 'next';
 
 const handler: NextApiHandler = (req, res) => {
   if (req.method !== 'GET')
-    res.status(405).json(generatorRespError(`method ${req.method ?? ''} not supported`));
+    res.status(405).json(generatorRespError(`请求方法 ${req.method ?? ''} 不支持`));
 
   const { NEXT_PUBLIC_HOME_TITLE, NEXT_PUBLIC_HOME_HEADER_TITLE, NEXT_PUBLIC_HOME_BLOG, NEXT_PUBLIC_HOME_TWITTER } = process.env;
 
