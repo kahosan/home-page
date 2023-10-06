@@ -2,7 +2,7 @@ export const fetcher = async <T>(url: string) => {
   const resp = await fetch(url);
 
   if (!resp.ok)
-    throw resp.json();
+    throw await resp.json();
 
   return resp.json() as Promise<T>;
 };
@@ -10,7 +10,7 @@ export const fetcherForUpdate = async <T>(url: string, { arg }: { arg: T }) => {
   const resp = await fetch(url, { method: 'POST', body: JSON.stringify(arg) });
 
   if (!resp.ok)
-    throw resp.json();
+    throw await resp.json();
 
   return resp.json() as Promise<T>;
 };
