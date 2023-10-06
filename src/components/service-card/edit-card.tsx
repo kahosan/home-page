@@ -5,11 +5,13 @@ import { useState } from 'react';
 
 import Link from '../link';
 
-import { useEditServices } from 'src/hooks/use-edit-services';
+import { useEdit } from 'src/hooks/use-edit';
 import type { Service } from 'src/types/services';
+import { useServices } from 'src/hooks/use-services';
 
 export default function EditCard(props: Service) {
-  const { isEdit, handleEditService } = useEditServices();
+  const { isEdit } = useEdit();
+  const { handleEditService } = useServices();
   const { visible, setVisible } = useModal(false);
 
   const [service, setService] = useState<Service & { oldName: string }>({ ...props, oldName: props.name });

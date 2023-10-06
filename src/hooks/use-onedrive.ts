@@ -2,19 +2,19 @@ import { useState } from 'react';
 import { useToasts } from '@geist-ui/core';
 
 import { calcAccessTokenExpires, useOnedriveData } from './use-onedrive-data';
-import { useEditServices } from './use-edit-services';
 import type { Service } from 'src/types/services';
 
 import { HTTPError, fetcherWithAuthorization } from 'src/lib/fetcher';
 import { CLIENT_ID, CLIENT_SECRET } from 'src/lib/constant';
 
 import type { RequestTokenResponse, ResourceError, UploadResponse } from 'src/types/onedrive';
+import { useServices } from './use-services';
 
 export const useOnedrive = () => {
   const { setToast } = useToasts();
 
   const [onedriveData, setOnedriveData] = useOnedriveData();
-  const { handleUpdateServices } = useEditServices();
+  const { handleUpdateServices } = useServices();
 
   const [isSyncing, setIsSyncing] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
