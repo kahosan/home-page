@@ -6,7 +6,7 @@ import Header from '../components/header';
 import DataCenter from '../components/data-center';
 
 import { BLOG, HEADER_TITLE, TITLE, TWITTER } from 'src/lib/constant';
-import type { Service } from 'src/types/services';
+import type { Service, ServiceGroup } from 'src/types/services';
 import type { Env } from 'src/types/env';
 
 export default function HomePage({ fallback }: Record<string, any>) {
@@ -24,6 +24,7 @@ export default function HomePage({ fallback }: Record<string, any>) {
 
 export async function getServerSideProps() {
   let servicesData: Service[] = [];
+  let serviceGroupsData: ServiceGroup[] = [];
   const envData: Env = {
     title: TITLE,
     headerTitle: HEADER_TITLE,
@@ -32,14 +33,18 @@ export async function getServerSideProps() {
   };
 
   if (process.env.API_URL !== '' && process.env.API_URL !== undefined) {
-    const res = await fetch(`${process.env.API_URL}/api/services`);
-    servicesData = await res.json();
+    const servicesResp = await fetch(`${process.env.API_URL}/api/services`);
+    servicesData = await servicesResp.json();
+
+    const serviceGroupsResp = await fetch(`${process.env.API_URL}/api/service-groups`);
+    serviceGroupsData = await serviceGroupsResp.json();
   }
 
   return {
     props: {
       fallback: {
         '/api/services': servicesData,
+        '/api/service-groups': serviceGroupsData,
         '/api/env': envData
       }
     }
