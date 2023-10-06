@@ -1,4 +1,4 @@
-import { generatorRespError } from 'src/utils/handler';
+import { generatorRespError } from 'src/lib/utils';
 import type { NextApiHandler } from 'next';
 
 const handler: NextApiHandler = (req, res) => {

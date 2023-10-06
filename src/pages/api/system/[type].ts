@@ -1,7 +1,7 @@
 import * as si from 'systeminformation';
 import type { NextApiHandler } from 'next';
 
-import { generatorRespError } from 'src/utils/handler';
+import { generatorRespError } from 'src/lib/utils';
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method !== 'GET') {

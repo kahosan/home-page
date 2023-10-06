@@ -1,7 +1,7 @@
 import type { NextApiHandler } from 'next';
 
-import { generatorRespError } from 'src/utils/handler';
-import { getAuthTokenWithCode, getAuthTokenWithRefreshToken } from 'src/utils/onedrive-auth';
+import { generatorRespError } from 'src/lib/utils';
+import { getAuthTokenWithCode, getAuthTokenWithRefreshToken } from 'src/lib/onedrive-auth';
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method !== 'POST') {

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useOnedrive } from 'src/hooks/use-onedrive';
 import { useOnedriveData } from 'src/hooks/use-onedrive-data';
 import { useServices } from 'src/hooks/use-services';
-import { getAuthCode } from 'src/utils/onedrive-auth';
+import { getAuthCode } from 'src/lib/onedrive-auth';
 
 export type DataSource = 'onedrive' | 'googledrive';
 export default function SyncData() {

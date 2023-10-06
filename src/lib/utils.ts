@@ -11,3 +11,4 @@ export const validateFormDataForService = (service: Service | undefined) => {
       return `${k} 没有填写`;
   }
 };
+export const generatorRespError = (msg: string) => ({ msg });

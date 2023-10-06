@@ -2,8 +2,8 @@ import type { NextApiHandler } from 'next';
 import type { Action } from 'src/types/next-handler';
 import type { Service } from 'src/types/services';
 
-import { generatorRespError } from 'src/utils/handler';
-import { addServicesData, deleteServicesData, editServiceData, updateServiceData } from 'src/utils/services';
+import { generatorRespError } from 'src/lib/utils';
+import { addServicesData, deleteServicesData, editServiceData, updateServiceData } from 'src/lib/services';
 
 const addHandler: NextApiHandler = async (req, res) => {
   const data = JSON.parse(req.body) as Service | undefined;

@@ -1,6 +1,6 @@
 import type { NextApiHandler } from 'next';
-import { generatorRespError } from 'src/utils/handler';
-import { getServicesData } from 'src/utils/services';
+import { generatorRespError } from 'src/lib/utils';
+import { getServicesData } from 'src/lib/services';
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method !== 'GET')
