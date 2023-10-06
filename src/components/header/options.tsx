@@ -4,11 +4,14 @@ import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 import Link from '../link';
-import { useEditServices } from 'src/hooks/use-edit-services';
+import { useEdit } from 'src/hooks/use-edit';
 import type { Service } from 'src/types/services';
+import { useServices } from 'src/hooks/use-services';
+import GroupAdd from './group-add';
 
 export default function Options() {
-  const { isEdit, handlerAddService, toggleEditMode } = useEditServices();
+  const { isEdit, toggleEditMode } = useEdit();
+  const { handlerAddService } = useServices();
   const { setVisible, visible } = useModal(false);
 
   const [service, setService] = useState<Service>({
@@ -24,6 +27,7 @@ export default function Options() {
 
   return (
     <>
+      <GroupAdd isEdit={isEdit} />
       <div onClick={() => setVisible(true)} className={`${isEdit ? 'visible op-100' : 'invisible op-0'} transition-all i-carbon-task-add text-5 mr-3 cursor-pointer opacity-animation-3`} />
       <div onClick={() => toggleEditMode()} className={`${isEdit ? 'i-carbon-edit-off' : 'i-carbon-edit'} text-5 cursor-pointer icon-tap-color mr-3 opacity-animation-3 `} />
       <Modal visible={visible} disableBackdropClick>
@@ -44,7 +48,8 @@ export default function Options() {
         </Modal.Content>
         <Modal.Action passive onClick={() => setVisible(false)}>取消</Modal.Action>
         <Modal.Action onClick={() => {
-          handlerAddService(service, () => setVisible(false));
+          handlerAddService(service);
+          setVisible(false);
         }}>提交</Modal.Action>
       </Modal>
     </>

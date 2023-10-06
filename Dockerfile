@@ -36,6 +36,8 @@ ENV NODE_ENV production
 
 ENV NEXT_PUBLIC_HOME_TWITTER https://twitter.com/nextjs
 ENV NEXT_PUBLIC_HOME_BLOG https://nextjs.org/blog
+ENV SERVICES_FILE_PATH /app/config/services.json
+ENV SERVICE_GROUPS_FILE_PATH /app/config/service-groups.json
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED 1

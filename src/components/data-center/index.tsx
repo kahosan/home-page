@@ -10,9 +10,10 @@ import useSWR from 'swr';
 import { fetcher } from 'src/lib/fetcher';
 
 import type { Env } from 'src/types/env';
+import DataGroup from './data-group';
 
 export default function DataCenter() {
-  const { servicesData } = useServices();
+  const { servicesData, handleDeleteService, handleEditService } = useServices();
   // docker 动态加载 env
   const { data } = useSWR<Env>('/api/env', fetcher);
   return (
@@ -27,7 +28,10 @@ export default function DataCenter() {
         </div>
       </div>
       <section className="mt-5 p-4 w-full rd-2 dark:bg-dark-box-background bg-box-background">
-        <DataView servicesData={servicesData} />
+        <DataView servicesData={servicesData} handleDelete={handleDeleteService} handleEdit={handleEditService} />
+      </section>
+      <section className="mt-5">
+        <DataGroup />
       </section>
       <Footer />
     </div>

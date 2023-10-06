@@ -1,5 +1,5 @@
-import { fetcher } from 'src/lib/fetcher';
 import useSWR from 'swr';
+import { fetcher } from 'src/lib/fetcher';
 
 import getYear from 'date-fns/getYear';
 

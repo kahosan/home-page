@@ -4,3 +4,8 @@ export interface Service {
   description: string
   icon: string
 }
+
+interface ServiceGroup {
+  name: string
+  services: Service[]
+}

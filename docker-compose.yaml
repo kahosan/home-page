@@ -10,6 +10,6 @@ services:
       - NEXT_PUBLIC_HOME_HEADER_TITLE=Data Center
       - NEXT_PUBLIC_HOME_TITLE=NAS 数据中心
     volumes:
-      - ./services.json:/app/services.json
+      - ./config:/app/config
     ports:
       - 3000:3000

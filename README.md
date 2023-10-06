@@ -12,6 +12,8 @@
 
 <p align="center">一个简洁的 NAS 主页 & 导航页</p>
 
+**此版本为独立于主分支带有分组的功能的版本，不会合并到主分支但会持续维护**
+
 ## 使用方法
 
 clone 本项目到你要部署的机器上
@@ -65,8 +67,6 @@ pnpm run start # -p 8765 可以这样选择端口
 
 3202 年了，用 [`docker-compose.yaml`](/docker-compose.yaml) 吧
 
-**注意在使用前创建好 `services.json` 文件**
-
 ### 修改自定义背景
 
 把你想自定义的背景图放到 `public` 目录替换 `bg.png` 文件，然后修改 `src/index.css` 中最下面的 `.custom-bg` 的配置。需要会一点点的 css 知识
@@ -91,6 +91,7 @@ pnpm run start # -p 8765 可以这样选择端口
 
 - [x] 在线编辑
 - [ ] 添加一些好玩的东西，暂时还没想法，如果有什么好的想法欢迎提 issue
+- [ ] 分组的数据同步
 
 ## License
 

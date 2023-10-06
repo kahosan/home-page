@@ -5,14 +5,21 @@ import { useState } from 'react';
 
 import Link from '../link';
 
-import { useEditServices } from 'src/hooks/use-edit-services';
+import { useEdit } from 'src/hooks/use-edit';
+
 import type { Service } from 'src/types/services';
 
-export default function EditCard(props: Service) {
-  const { isEdit, handleEditService } = useEditServices();
+interface Props extends Service {
+  handleEdit: (service: Service, id: string) => void
+}
+
+export default function EditCard(props: Props) {
+  const { isEdit } = useEdit();
   const { visible, setVisible } = useModal(false);
 
-  const [service, setService] = useState<Service & { oldName: string }>({ ...props, oldName: props.name });
+  const [service, setService] = useState<Service>(props);
+
+  const id = props.name;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, key: keyof Service) => {
     setService(s => ({ ...s, [key]: e.target.value }));
@@ -39,7 +46,8 @@ export default function EditCard(props: Service) {
         </Modal.Content>
         <Modal.Action passive onClick={() => setVisible(false)}>取消</Modal.Action>
         <Modal.Action onClick={() => {
-          handleEditService(service, () => setVisible(false));
+          props.handleEdit(service, id);
+          setVisible(false);
         }}>提交</Modal.Action>
       </Modal>
     </>

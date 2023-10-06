@@ -1,0 +1,19 @@
+[
+  {
+    "name": "测试组",
+    "services": [
+      {
+        "name": "aria2",
+        "description": "HTTP 下载器",
+        "icon": "download",
+        "path": "https://github.com/aria2/aria2"
+      },
+      {
+        "name": "adguard home",
+        "description": "广告拦截以及 DNS 服务器",
+        "icon": "dns-services",
+        "path": "https://github.com/AdguardTeam/AdGuardHome"
+      }
+    ]
+  }
+]
