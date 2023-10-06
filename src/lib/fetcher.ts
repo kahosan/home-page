@@ -1,4 +1,19 @@
-export const fetcher = <T>(url: string) => fetch(url).then(res => res.json() as Promise<T>);
+export const fetcher = async <T>(url: string) => {
+  const resp = await fetch(url);
+
+  if (!resp.ok)
+    throw resp.json();
+
+  return resp.json() as Promise<T>;
+};
+export const fetcherForUpdate = async <T>(url: string, { arg }: { arg: T }) => {
+  const resp = await fetch(url, { method: 'POST', body: JSON.stringify(arg) });
+
+  if (!resp.ok)
+    throw resp.json();
+
+  return resp.json() as Promise<T>;
+};
 
 export const ONEDRIVE_DRIVE_API = 'https://graph.microsoft.com/v1.0/me/drive/';
 
