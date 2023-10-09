@@ -1,13 +1,17 @@
-import type { Handler } from 'src/types/next-handler';
+import type { NextApiHandler } from 'next';
+import { generatorRespError } from 'src/lib/utils';
+import { getServicesData } from 'src/lib/services';
 
-import { generatorRespError } from 'src/utils/handler';
-import { getServicesData } from 'src/utils/services';
-
-const handler: Handler = async (req, res) => {
+const handler: NextApiHandler = async (req, res) => {
   if (req.method !== 'GET')
-    res.status(405).json(generatorRespError(`method ${req.method ?? ''} not supported`));
-  else
+    res.status(405).json(generatorRespError(`请求方法 ${req.method ?? ''} 不支持`));
+
+  try {
     res.status(200).json(await getServicesData());
+  } catch (e) {
+    if (e instanceof Error)
+      res.status(500).json(generatorRespError(e.message));
+  }
 };
 
 export default handler;

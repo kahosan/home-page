@@ -1,16 +1,18 @@
 import EditCard from './edit-card';
 
-import { useEditServices } from 'src/hooks/use-edit-services';
+import { useEdit } from 'src/hooks/use-edit';
 import { useIcon } from 'src/hooks/use-icon';
 
 import { useAtomValue } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import type { Service } from 'src/types/services';
+import { useServices } from 'src/hooks/use-services';
 
 export const serviceNameUpperAtom = atomWithStorage<boolean>('home-page-service-name-upper', true);
 
 export default function ServiceCard(props: Service) {
-  const { isEdit, handleDeleteService } = useEditServices();
+  const { isEdit } = useEdit();
+  const { handleDeleteService } = useServices();
   const isUpper = useAtomValue(serviceNameUpperAtom);
 
   const { name, description, icon, path } = props;

@@ -29,7 +29,6 @@ export const getAuthTokenWithCode = async (code: string) => {
   if (!res.ok)
     throw data;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return -- no need to check
   return data;
 };
 
@@ -47,6 +46,5 @@ export const getAuthTokenWithRefreshToken = async (refreshToken: string) => {
   if (!res.ok)
     throw data;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return -- no need to check
   return data;
 };

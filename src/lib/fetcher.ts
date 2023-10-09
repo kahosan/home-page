@@ -1,5 +1,3 @@
-export const fetcher = <T>(url: string) => fetch(url).then(res => res.json() as Promise<T>);
-
 export const ONEDRIVE_DRIVE_API = 'https://graph.microsoft.com/v1.0/me/drive/';
 
 export class HTTPError extends Error {
@@ -11,6 +9,36 @@ export class HTTPError extends Error {
     this.status = status;
   }
 }
+
+export const fetcherWithJSON = async <T>(url: string, options?: RequestInit) => {
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (!res.ok) {
+    const data = await res.json();
+    if ('msg' in data)
+      throw new HTTPError(data.msg, data, res.status);
+
+    throw new HTTPError('An error occurred while fetching the data.', data, res.status);
+  }
+
+  return res.json() as Promise<T>;
+};
+
+export const fetcher = async <T>(url: string) => {
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    const data = await res.json();
+    throw new HTTPError(data.msg, data, res.status);
+  }
+
+  return res.json() as Promise<T>;
+};
 
 export const fetcherWithAuthorization = async <T>([key, token]: [string, string], options?: RequestInit): Promise<T> => {
   const headers = new Headers({

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useOnedrive } from 'src/hooks/use-onedrive';
 import { useOnedriveData } from 'src/hooks/use-onedrive-data';
 import { useServices } from 'src/hooks/use-services';
-import { getAuthCode } from 'src/utils/onedrive-auth';
+import { getAuthCode } from 'src/lib/onedrive-auth';
 
 export type DataSource = 'onedrive' | 'googledrive';
 export default function SyncData() {
@@ -21,7 +21,7 @@ export default function SyncData() {
       setToast({ text: '请输入 Code', type: 'error', delay: 3000 });
       return;
     }
-    const code = codeText.replace(/.*\?code=/g, '').trim();
+    const code = codeText.replaceAll(/.*\?code=/g, '').trim();
     setOnedriveData({ ...onedriveData, authCode: code });
     setToast({ text: 'code 设置成功，请点击想操作的按钮', delay: 3000 });
   };

@@ -9,6 +9,6 @@ export const validateFormDataForService = (service: Service | undefined) => {
   for (const [k, v] of Object.entries(service)) {
     if (!v)
       return `${k} 没有填写`;
-
   }
 };
+export const generatorRespError = (msg: string) => ({ msg });

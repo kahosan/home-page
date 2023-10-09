@@ -1,6 +1,6 @@
 import { type Dispatch, useEffect, useState } from 'react';
 
-const queriesMap = new Map<string, { mql: MediaQueryList; dispatchers: Set<Dispatch<boolean>>; listener: () => void }>();
+const queriesMap = new Map<string, { mql: MediaQueryList, dispatchers: Set<Dispatch<boolean>>, listener: () => void }>();
 
 type QueryStateSetter = (matches: boolean) => void;
 

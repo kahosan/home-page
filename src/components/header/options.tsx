@@ -4,11 +4,13 @@ import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 import Link from '../link';
-import { useEditServices } from 'src/hooks/use-edit-services';
+import { useEdit } from 'src/hooks/use-edit';
 import type { Service } from 'src/types/services';
+import { useServices } from 'src/hooks/use-services';
 
 export default function Options() {
-  const { isEdit, handlerAddService, toggleEditMode } = useEditServices();
+  const { isEdit, toggleEditMode } = useEdit();
+  const { handlerAddService } = useServices();
   const { setVisible, visible } = useModal(false);
 
   const [service, setService] = useState<Service>({
