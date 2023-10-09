@@ -12,6 +12,13 @@ import { useServices } from './use-services';
 
 export const useOnedrive = () => {
   const { setToast } = useToasts();
+  const handleError = (message: string) => {
+    setToast({
+      text: message,
+      type: 'error',
+      delay: 3000
+    });
+  };
 
   const [onedriveData, setOnedriveData] = useOnedriveData();
   const { handleUpdateServices } = useServices();
@@ -47,19 +54,14 @@ export const useOnedrive = () => {
         refreshToken: ''
       });
 
-      setToast({
-        text: '获取 onedrive token 失败，请重新获取 code',
-        type: 'error',
-        delay: 4000
-      });
-
+      handleError('获取 onedrive token 失败，请重新获取 code');
       console.error(e);
     }
   };
 
   const getToken = async () => {
     if (!CLIENT_ID || !CLIENT_SECRET) {
-      setToast({ text: 'client id 和 client secret 不存在', type: 'error', delay: 4000 });
+      handleError('client id 或 client secret 不存在');
       return;
     }
 
@@ -71,7 +73,7 @@ export const useOnedrive = () => {
       return requestTokenHandler(`refresh_token=${onedriveData.refreshToken}`);
 
     if (!onedriveData.authCode) {
-      setToast({ text: 'auth code 不存在', type: 'error', delay: 4000 });
+      handleError('auth code 不存在');
       return;
     }
 
@@ -88,9 +90,9 @@ export const useOnedrive = () => {
       return;
     }
 
-    if (services === undefined || services.length === 0) {
+    if (!services || services.length === 0) {
       setIsUploading(false);
-      setToast({ text: 'services 数据不存在', type: 'error', delay: 4000 });
+      handleError('services 数据不存在');
       return;
     }
 
@@ -108,7 +110,7 @@ export const useOnedrive = () => {
       setIsUploading(false);
       if (e instanceof HTTPError) {
         const errorInfo = e.info as ResourceError;
-        setToast({ text: `更新失败: ${errorInfo.error.message}`, type: 'error', delay: 4000 });
+        handleError(`更新失败: ${errorInfo.error.message}`);
       }
     }
   };
@@ -132,7 +134,7 @@ export const useOnedrive = () => {
       setIsSyncing(false);
       if (e instanceof HTTPError) {
         const errorInfo = e.info as ResourceError;
-        setToast({ text: `同步失败: ${errorInfo.error.message}`, type: 'error', delay: 4000 });
+        handleError(`同步失败: ${errorInfo.error.message}`);
       }
     }
   };
