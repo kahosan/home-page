@@ -14,7 +14,7 @@ export default function EditCard(props: Service) {
   const { handleEditService } = useServices();
   const { visible, setVisible } = useModal(false);
 
-  const [service, setService] = useState<Service & { oldName: string }>({ ...props, oldName: props.name });
+  const [service, setService] = useState<Service>({ ...props });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, key: keyof Service) => {
     setService(s => ({ ...s, [key]: e.target.value }));
@@ -41,7 +41,7 @@ export default function EditCard(props: Service) {
         </Modal.Content>
         <Modal.Action passive onClick={() => setVisible(false)}>取消</Modal.Action>
         <Modal.Action onClick={() => {
-          handleEditService(service, () => setVisible(false));
+          handleEditService(service, props.name, () => setVisible(false));
         }}>提交</Modal.Action>
       </Modal>
     </>

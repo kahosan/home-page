@@ -4,3 +4,7 @@ export interface Service {
   description: string
   icon: string
 }
+
+export interface ActionsResponse {
+  msg: string
+}

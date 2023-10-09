@@ -1,133 +1,110 @@
 import useSWR from 'swr';
-import { fetcher } from 'src/lib/fetcher';
+import { fetcher, fetcherWithJSON } from 'src/lib/fetcher';
 
 import { useToasts } from '@geist-ui/core';
 
 import { validateFormDataForService } from 'src/lib/utils';
 
-import type { Service } from 'src/types/services';
+import type { ActionsResponse, Service } from 'src/types/services';
 
 export const useServices = () => {
+  const { setToast } = useToasts();
+  const handleError = (message: string) => {
+    setToast({
+      text: message,
+      type: 'error',
+      delay: 3000
+    });
+  };
+
   const { data: servicesData, mutate } = useSWR<Service[]>('/api/services', fetcher, {
     onError(e) {
-      console.error(e);
+      if (e instanceof Error) {
+        const message = `获取数据出错: ${e.message}`;
+
+        handleError(message);
+        console.error(message);
+      }
     }
   });
 
-  const { setToast } = useToasts();
-
-  const errorHandler = (e: unknown) => {
-    if (e instanceof Error) {
-      setToast({
-        text: e.message,
-        type: 'error',
-        delay: 3000
-      });
-
-      console.error(e);
-    }
-  };
-
-  const handlerAddService = async (service: Service | undefined, closeModal: () => void) => {
+  const handlerAddService = async (service: Service, closeModal: () => void) => {
     // validate data
     const error = validateFormDataForService(service);
-
     if (error) {
-      setToast({
-        text: error,
-        type: 'error',
-        delay: 4000
-      });
+      handleError(error);
       return;
     }
 
     try {
-      const res = await fetch('/api/services/add', { method: 'POST', body: JSON.stringify(service) });
-      const data = await res.json();
-
-      if (!res.ok)
-        throw new Error(data.msg);
+      const data = await fetcherWithJSON<ActionsResponse>('/api/services/add', { method: 'POST', body: JSON.stringify(service) });
 
       closeModal();
       // refetch data
       mutate();
-      setToast({
-        text: data.msg,
-        delay: 4000
-      });
+      setToast({ text: data.msg });
     } catch (e) {
-      errorHandler(e);
+      if (e instanceof Error) {
+        const message = `添加服务出错: ${e.message}`;
+        handleError(message);
+      }
     }
   };
 
-  const handleDeleteService = async (targetName: string) => {
+  const handleDeleteService = async (name: string) => {
     try {
-      const res = await fetch('/api/services/delete', { method: 'POST', body: targetName });
-      const data = await res.json();
-
-      if (!res.ok)
-        throw new Error(data.msg);
+      const data = await fetcherWithJSON<ActionsResponse>('/api/services/delete', { method: 'POST', body: JSON.stringify({ name }) });
 
       // refetch data
       mutate();
-      setToast({
-        text: data.msg,
-        delay: 4000
-      });
+      setToast({ text: data.msg });
     } catch (e) {
-      errorHandler(e);
+      if (e instanceof Error) {
+        const message = `删除服务出错: ${e.message}`;
+        handleError(message);
+      }
     }
   };
 
-  const handleEditService = async (service: Service & { oldName: string }, closeModal: () => void) => {
+  const handleEditService = async (service: Service, id: string, closeModal: () => void) => {
     // validate data
-    const result = validateFormDataForService(service);
-
-    if (result) {
-      setToast({
-        text: result,
-        type: 'error',
-        delay: 4000
-      });
+    const error = validateFormDataForService(service);
+    if (error) {
+      handleError(error);
       return;
     }
 
     try {
-      const res = await fetch('/api/services/edit', { method: 'POST', body: JSON.stringify(service) });
-      const data = await res.json();
-
-      if (!res.ok)
-        throw new Error(data.msg);
+      const data = await fetcherWithJSON<ActionsResponse>('/api/services/edit', { method: 'POST', body: JSON.stringify({ newData: service, id }) });
 
       closeModal();
       // refetch data
       mutate();
-      setToast({
-        text: data.msg,
-        delay: 4000
-      });
+      setToast({ text: data.msg });
     } catch (e) {
-      errorHandler(e);
+      if (e instanceof Error) {
+        const message = `编辑服务出错: ${e.message}`;
+        handleError(message);
+      }
     }
   };
 
   const handleUpdateServices = async (services: Service[]) => {
     try {
-      const res = await fetch('/api/services/mutate', { method: 'POST', body: JSON.stringify(services) });
-      const data = await res.json();
-
-      if (!res.ok)
-        throw new Error(data.msg);
+      await fetcherWithJSON<ActionsResponse>('/api/services/update', { method: 'POST', body: JSON.stringify(services) });
 
       // refetch data
       mutate();
     } catch (e) {
-      errorHandler(e);
+      if (e instanceof Error) {
+        const message = `更新服务出错: ${e.message}`;
+        handleError(message);
+      }
     }
   };
 
   return {
-    servicesData,
+    servicesData: Array.isArray(servicesData) ? servicesData : [],
     handlerAddService,
     handleDeleteService,
     handleEditService,
