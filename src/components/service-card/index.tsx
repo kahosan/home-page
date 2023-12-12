@@ -8,12 +8,16 @@ import { atomWithStorage } from 'jotai/utils';
 import type { Service } from 'src/types/services';
 import { useServices } from 'src/hooks/use-services';
 
+// TODO 提到一个 lib 中的 settings
 export const serviceNameUpperAtom = atomWithStorage<boolean>('home-page-service-name-upper', true);
+export const serviceOpenWithNewTabAtom = atomWithStorage<boolean>('home-page-service-open-with-new-tab', false);
 
 export default function ServiceCard(props: Service) {
   const { isEdit } = useEdit();
   const { handleDeleteService } = useServices();
+
   const isUpper = useAtomValue(serviceNameUpperAtom);
+  const newTab = useAtomValue(serviceOpenWithNewTabAtom);
 
   const { name, description, icon, path } = props;
 
@@ -26,7 +30,7 @@ export default function ServiceCard(props: Service) {
       >
         <div onClick={() => handleDeleteService(name)} className={`absolute top-1.5 right--2 i-carbon-trash-can transition-all ${isEdit ? 'visible op-100' : 'invisible op-0'} cursor-pointer z999`} />
         <EditCard {...props} />
-        <a href={path} className="text-center opacity-animation-3 relative color-inherit">
+        <a href={path} className="text-center opacity-animation-3 relative color-inherit" target={newTab ? '_blank' : '_self'} rel="noreferrer">
           <div className="flex justify-center items-center">
             <div className={`i-carbon-${safeIcon} text-2xl mr-2`} />
             <p className="text-3.5 m-0">{isUpper ? name.toUpperCase() : name}</p>

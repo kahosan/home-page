@@ -3,7 +3,7 @@ import { Checkbox, Collapse } from '@geist-ui/core';
 import SyncData from './sync-data';
 
 import { useAtom } from 'jotai';
-import { serviceNameUpperAtom } from '../service-card';
+import { serviceNameUpperAtom, serviceOpenWithNewTabAtom } from '../service-card';
 
 import type { SettingItems } from 'src/pages/settings';
 
@@ -30,11 +30,15 @@ function OptionWrapper({ title, initialVisible, children }: OptionWrapperProps) 
 
 export default function SettingsOption({ title }: { title: SettingItems }) {
   const [isUpper, setIsUpper] = useAtom(serviceNameUpperAtom);
+  const [newTab, setNewTab] = useAtom(serviceOpenWithNewTabAtom);
   switch (title) {
     case '基本设置':
       return (
         <OptionWrapper title={title} initialVisible>
-          <Checkbox checked={isUpper} onChange={() => setIsUpper(p => !p)}>服务名大写</Checkbox>
+          <div className="flex flex-wrap gap-4">
+            <Checkbox checked={isUpper} onChange={() => setIsUpper(p => !p)}>服务名大写</Checkbox>
+            <Checkbox checked={newTab} onChange={() => setNewTab(p => !p)}>在新标签页打开服务</Checkbox>
+          </div>
         </OptionWrapper>
       );
     case '同步数据':
