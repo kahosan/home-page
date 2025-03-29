@@ -47,7 +47,8 @@ export default function Options() {
         <Modal.Action passive onClick={() => setVisible(false)}>取消</Modal.Action>
         <Modal.Action onClick={() => {
           handlerAddService(service, () => setVisible(false));
-        }}>提交</Modal.Action>
+        }}
+        >提交</Modal.Action>
       </Modal>
     </>
   );

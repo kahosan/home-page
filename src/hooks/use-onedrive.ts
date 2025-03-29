@@ -10,7 +10,7 @@ import { CLIENT_ID, CLIENT_SECRET } from 'src/lib/constant';
 import type { RequestTokenResponse, ResourceError, UploadResponse } from 'src/types/onedrive';
 import { useServices } from './use-services';
 
-export const useOnedrive = () => {
+export function useOnedrive() {
   const { setToast } = useToasts();
   const handleError = (message: string) => {
     setToast({
@@ -31,6 +31,7 @@ export const useOnedrive = () => {
       const res = await fetch(`/api/onedrive?${query}`, { method: 'POST' });
       const data = await res.json() as RequestTokenResponse;
       if (!res.ok)
+        // eslint-disable-next-line @typescript-eslint/only-throw-error -- ignore
         throw data;
 
       // 将 token 数据保存在本地
@@ -145,4 +146,4 @@ export const useOnedrive = () => {
     handleUpload,
     handleSync
   };
-};
+}

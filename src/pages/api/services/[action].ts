@@ -1,3 +1,4 @@
+// eslint-disable-next-line @eslint-react/naming-convention/filename -- ignore
 import type { NextApiHandler } from 'next';
 import type { Action } from 'src/types/next-handler';
 import type { Service } from 'src/types/services';

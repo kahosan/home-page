@@ -1,7 +1,8 @@
+// eslint-disable-next-line @eslint-react/naming-convention/filename -- ignore
 import type { DocumentContext, DocumentInitialProps } from 'next/document';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
-const MyDocument = () => {
+function MyDocument() {
   return (
     <Html>
       <Head />
@@ -28,7 +29,7 @@ const MyDocument = () => {
       </body>
     </Html>
   );
-};
+}
 
 MyDocument.getInitialProps = async (ctx: DocumentContext): Promise<DocumentInitialProps> => {
   const initialProps = await Document.getInitialProps(ctx);

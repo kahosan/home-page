@@ -1,3 +1,5 @@
+/* eslint-disable promise/catch-or-return -- ignore */
+// eslint-disable-next-line @eslint-react/naming-convention/filename -- ignore
 import { useEffect } from 'react';
 import { atom, useAtom } from 'jotai';
 

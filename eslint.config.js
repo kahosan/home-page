@@ -1,8 +1,5 @@
 'use strict';
 
-const { kaho, node } = require('eslint-config-kaho');
+const { kaho } = require('eslint-config-kaho');
 
-module.exports = [
-  ...kaho({ ts: { tsconfigPath: './tsconfig.json' } }),
-  ...node({ files: ['./eslint.config.js'] })
-];
+module.exports = kaho();

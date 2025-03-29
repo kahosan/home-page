@@ -2,7 +2,7 @@ import type { Service } from 'src/types/services';
 
 export const isBrowser = typeof window !== 'undefined';
 
-export const validateFormDataForService = (service: Service | undefined) => {
+export function validateFormDataForService(service: Service | undefined) {
   if (!service)
     return '请填写所需数据';
 
@@ -10,5 +10,5 @@ export const validateFormDataForService = (service: Service | undefined) => {
     if (!v)
       return `${k} 没有填写`;
   }
-};
+}
 export const generatorRespError = (msg: string) => ({ msg });

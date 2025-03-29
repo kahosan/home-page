@@ -1,10 +1,11 @@
-import { type Dispatch, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { Dispatch } from 'react';
 
 const queriesMap = new Map<string, { mql: MediaQueryList, dispatchers: Set<Dispatch<boolean>>, listener: () => void }>();
 
 type QueryStateSetter = (matches: boolean) => void;
 
-const querySubscribe = (query: string, setState: QueryStateSetter) => {
+function querySubscribe(query: string, setState: QueryStateSetter) {
   let entry = queriesMap.get(query);
 
   if (!entry) {
@@ -30,9 +31,9 @@ const querySubscribe = (query: string, setState: QueryStateSetter) => {
 
   entry.dispatchers.add(setState);
   setState(entry.mql.matches);
-};
+}
 
-const queryUnsubscribe = (query: string, setState: QueryStateSetter): void => {
+function queryUnsubscribe(query: string, setState: QueryStateSetter): void {
   const entry = queriesMap.get(query);
 
   // else path is impossible to test in normal situation
@@ -50,7 +51,7 @@ const queryUnsubscribe = (query: string, setState: QueryStateSetter): void => {
       else mql.removeListener(listener);
     }
   }
-};
+}
 
 /**
  * Tracks the state of CSS media query.
@@ -59,7 +60,7 @@ const queryUnsubscribe = (query: string, setState: QueryStateSetter): void => {
  *
  * @param query CSS media query to track.
  */
-export const useMediaQuery = (query: string): boolean | undefined => {
+export function useMediaQuery(query: string): boolean | undefined {
   const [state, setState] = useState<boolean>();
 
   useEffect(() => {
@@ -69,4 +70,4 @@ export const useMediaQuery = (query: string): boolean | undefined => {
   }, [query]);
 
   return state;
-};
+}

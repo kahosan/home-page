@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai';
 
 export const isEditAtom = atom(false);
 
-export const useEdit = () => {
+export function useEdit() {
   const [isEdit, setIsEdit] = useAtom(isEditAtom);
   const toggleEditMode = () => setIsEdit(!isEdit);
 
@@ -10,4 +10,4 @@ export const useEdit = () => {
     isEdit,
     toggleEditMode
   };
-};
+}

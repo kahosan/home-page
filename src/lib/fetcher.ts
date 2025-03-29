@@ -5,12 +5,13 @@ export class HTTPError extends Error {
   status: number;
   constructor(message: string, info: unknown, status: number) {
     super(message);
+    this.name = 'HTTPError';
     this.info = info;
     this.status = status;
   }
 }
 
-export const fetcherWithJSON = async <T>(url: string, options?: RequestInit) => {
+export async function fetcherWithJSON<T>(url: string, options?: RequestInit) {
   const res = await fetch(url, {
     ...options,
     headers: {
@@ -27,9 +28,9 @@ export const fetcherWithJSON = async <T>(url: string, options?: RequestInit) => 
   }
 
   return res.json() as Promise<T>;
-};
+}
 
-export const fetcher = async <T>(url: string) => {
+export async function fetcher<T>(url: string) {
   const res = await fetch(url);
 
   if (!res.ok) {
@@ -38,9 +39,9 @@ export const fetcher = async <T>(url: string) => {
   }
 
   return res.json() as Promise<T>;
-};
+}
 
-export const fetcherWithAuthorization = async <T>([key, token]: [string, string], options?: RequestInit): Promise<T> => {
+export async function fetcherWithAuthorization<T>([key, token]: [string, string], options?: RequestInit): Promise<T> {
   const headers = new Headers({
     Authorization: `Bearer ${token}`
   });
@@ -64,4 +65,4 @@ export const fetcherWithAuthorization = async <T>([key, token]: [string, string]
     throw new HTTPError('An error occurred while fetching the data.', data, res.status);
   }
   return data as T;
-};
+}

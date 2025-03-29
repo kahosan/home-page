@@ -1,3 +1,4 @@
+// eslint-disable-next-line @eslint-react/naming-convention/filename -- ignore
 import * as si from 'systeminformation';
 import type { NextApiHandler } from 'next';
 

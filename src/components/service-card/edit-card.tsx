@@ -42,7 +42,8 @@ export default function EditCard(props: Service) {
         <Modal.Action passive onClick={() => setVisible(false)}>取消</Modal.Action>
         <Modal.Action onClick={() => {
           handleEditService(service, props.name, () => setVisible(false));
-        }}>提交</Modal.Action>
+        }}
+        >提交</Modal.Action>
       </Modal>
     </>
   );

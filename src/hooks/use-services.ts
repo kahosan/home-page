@@ -7,7 +7,7 @@ import { validateFormDataForService } from 'src/lib/utils';
 
 import type { ActionsResponse, Service } from 'src/types/services';
 
-export const useServices = () => {
+export function useServices() {
   const { setToast } = useToasts();
   const handleError = (message: string) => {
     setToast({
@@ -110,4 +110,4 @@ export const useServices = () => {
     handleEditService,
     handleUpdateServices
   };
-};
+}

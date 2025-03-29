@@ -11,13 +11,15 @@ interface Hitokoto {
 * {@link https://hitokoto.cn/}
 */
 
-export const useHitokoto = () => useSWR<Hitokoto>(
-  'https://v1.hitokoto.cn/?c=a',
-  fetcher,
-  {
-    revalidateOnFocus: false,
-    onError(e) {
-      console.error(e.message);
+export function useHitokoto() {
+  return useSWR<Hitokoto>(
+    'https://v1.hitokoto.cn/?c=a',
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      onError(e) {
+        console.error(e.message);
+      }
     }
-  }
-);
+  );
+}
