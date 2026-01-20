@@ -4,8 +4,11 @@ export const authApi = 'https://login.microsoftonline.com/common/oauth2/v2.0';
 export const scope = 'Files.ReadWrite offline_access';
 export const redirectUri = 'http://localhost';
 
-export function getAuthCode() {
-  window.open(`${authApi}/authorize?client_id=${CLIENT_ID}&scope=${encodeURIComponent(scope)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}`, '_blank');
+export async function getAuthCode() {
+  const res = await fetch('/api/onedrive');
+  const clientID = await res.text();
+
+  window.open(`${authApi}/authorize?client_id=${clientID}&scope=${encodeURIComponent(scope)}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}`, '_blank');
 }
 
 function initParams(params: Record<string, string>) {

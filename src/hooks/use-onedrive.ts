@@ -5,7 +5,6 @@ import { calcAccessTokenExpires, useOnedriveData } from './use-onedrive-data';
 import type { Service } from 'src/types/services';
 
 import { HTTPError, fetcherWithAuthorization } from 'src/lib/fetcher';
-import { CLIENT_ID, CLIENT_SECRET } from 'src/lib/constant';
 
 import type { RequestTokenResponse, ResourceError, UploadResponse } from 'src/types/onedrive';
 import { useServices } from './use-services';
@@ -61,11 +60,6 @@ export function useOnedrive() {
   };
 
   const getToken = async () => {
-    if (!CLIENT_ID || !CLIENT_SECRET) {
-      handleError('client id 或 client secret 不存在');
-      return;
-    }
-
     if (onedriveData.accessToken.expires > Date.now())
       return onedriveData.accessToken.token;
 

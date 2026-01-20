@@ -1,14 +1,15 @@
-FROM node:18-alpine AS base
+FROM node:24-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
+
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json pnpm-lock.yaml ./
-RUN yarn global add pnpm && pnpm i --frozen-lockfile
+RUN pnpm i --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -21,21 +22,13 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-ENV API_URL http://localhost:3000
-
-ENV NEXT_PUBLIC_ONEDRIVE_CLIENT_ID 23020e85-55d0-49bc-bb27-9620d91892ba
-ENV NEXT_PUBLIC_ONEDRIVE_CLIENT_SECRET e4f8Q~pMXjRLkiZfrjFq4Ry0QCOFg4sg4HyOBbcj
-
 RUN npm run build
 
 # Production image, copy all the files and run next
-FROM base AS runner
+FROM oven/bun:alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
-ENV NEXT_PUBLIC_HOME_TWITTER https://twitter.com/nextjs
-ENV NEXT_PUBLIC_HOME_BLOG https://nextjs.org/blog
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED 1
@@ -61,4 +54,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "server.js"]
+CMD ["bun", "server.js"]

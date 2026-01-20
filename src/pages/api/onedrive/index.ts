@@ -1,12 +1,12 @@
 import type { NextApiHandler } from 'next';
 
+import { CLIENT_ID } from 'src/lib/constant'
 import { generatorRespError } from 'src/lib/utils';
 import { getAuthTokenWithCode, getAuthTokenWithRefreshToken } from 'src/lib/onedrive-auth';
 
 const handler: NextApiHandler = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.status(405).json(generatorRespError(`请求方法 ${req.method ?? ''} 不支持`));
-    return;
+  if (req.method === 'GET') {
+    return res.send(CLIENT_ID);
   }
 
   const { code, refresh_token } = req.query as Record<string, string | undefined>;
